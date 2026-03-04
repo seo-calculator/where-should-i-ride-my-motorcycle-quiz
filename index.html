@@ -947,56 +947,24 @@ const ANSWER_TAGS = {
   }
 };
 
-// Bike type lookup   no brand recommendations, just riding-style-appropriate categories
-// Keyed by: group_motivation_experience (falls back through progressively shorter keys)
+// Bike type lookup: three categories only (Adventure, Touring, Cruiser)
 const BIKE_TYPES = {
-  // Passenger always gets a touring or cruiser   comfort above all
-  passenger: {
-    label: 'Touring or Cruiser',
-    emoji: '🛣',
-    desc: 'Two-up riding needs a planted, comfortable bike with real passenger accommodations   think Harley-Davidson touring line, Honda Gold Wing, Indian Chieftain, or BMW R series.',
-    searchType: 'Touring'
-  },
-  // Adventure / gravel
-  adventure_gravel: {
-    label: 'Adventure Bike',
+  Adventure: {
+    label: 'Adventure',
     emoji: '🏕',
-    desc: 'Off-pavement and mixed terrain calls for a mid-to-large ADV bike   BMW GS series, KTM Adventure, Honda Africa Twin, or Yamaha Tenere.',
+    desc: 'Off-pavement sections, mountain passes, and mixed terrain call for an ADV bike. Look for BMW GS series, KTM Adventure, Honda Africa Twin, or Yamaha Tenere on Riders Share.',
     searchType: 'Adventure'
   },
-  // Mountain twisty + experienced = sport or naked
-  mountain_twisty_experienced: {
-    label: 'Sport or Naked',
-    emoji: '🏁',
-    desc: 'Technical canyon roads reward a nimble, front-end-communicative bike   sport nakeds like the Kawasaki Z series, Triumph Speed Triple, or Ducati Monster put you in the right position without full-tuck ergonomics.',
-    searchType: 'Sport'
-  },
-  // Mountain twisty + intermediate = standard/naked
-  mountain_twisty_intermediate: {
-    label: 'Standard / Naked',
-    emoji: '🏍',
-    desc: 'Upright ergonomics and neutral handling make standard bikes the right call for twisty roads at an intermediate level   Honda CB series, Kawasaki Z650, or Triumph Trident.',
-    searchType: 'Standard'
-  },
-  // Cross country or scenic cruise = touring
-  touring_default: {
+  Touring: {
     label: 'Touring',
     emoji: '🛣',
-    desc: 'Long days in the saddle call for wind protection, integrated luggage, and comfortable ergonomics   Harley-Davidson Road Glide, BMW K1600, Honda Gold Wing, or Indian Pursuit.',
+    desc: 'Long days in the saddle call for wind protection, integrated luggage, and comfortable ergonomics. Harley-Davidson touring line, Honda Gold Wing, BMW R series, and Indian Pursuit are the go-to options.',
     searchType: 'Touring'
   },
-  // Weekend escape / beginner = cruiser or standard
-  beginner_default: {
-    label: 'Cruiser or Standard',
-    emoji: '🏍',
-    desc: 'A mid-displacement cruiser or standard gives beginners an approachable riding position, predictable handling, and wide availability on Riders Share   Honda Rebel, Harley-Davidson Sportster, or Royal Enfield.',
-    searchType: 'Cruiser'
-  },
-  // Default fallback
-  default: {
+  Cruiser: {
     label: 'Cruiser',
     emoji: '🏍',
-    desc: 'A cruiser is the most versatile and widely available rental type on Riders Share   comfortable for most roads and easy to find in any major US city.',
+    desc: 'Relaxed riding position, wide availability, and easy handling on open roads. Harley-Davidson, Indian, and Honda cruisers are the most common rentals on Riders Share in every major US city.',
     searchType: 'Cruiser'
   }
 };
@@ -1712,29 +1680,14 @@ function computeResult() {
 }
 
 function getBikeType(motivation, experience, group) {
-  // Passenger overrides everything   comfort and safety for two-up
-  if (group === 'passenger') {
-    return BIKE_TYPES.passenger;
-  }
-  // Adventure gravel regardless of experience
-  if (motivation === 'adventure_gravel') {
-    return BIKE_TYPES.adventure_gravel;
-  }
-  // Mountain twisty splits by experience
-  if (motivation === 'mountain_twisty') {
-    return experience === 'experienced'
-      ? BIKE_TYPES.mountain_twisty_experienced
-      : BIKE_TYPES.mountain_twisty_intermediate;
-  }
-  // Cross country or scenic cruise = touring
-  if (motivation === 'cross_country' || motivation === 'scenic_cruise') {
-    return BIKE_TYPES.touring_default;
-  }
-  // Beginner on any motivation = cruiser/standard
-  if (experience === 'beginner') {
-    return BIKE_TYPES.beginner_default;
-  }
-  return BIKE_TYPES.default;
+  if (motivation === 'adventure_gravel') return BIKE_TYPES.Adventure;
+  if (motivation === 'cross_country')    return BIKE_TYPES.Touring;
+  if (motivation === 'scenic_cruise')    return BIKE_TYPES.Touring;
+  if (group === 'passenger')             return BIKE_TYPES.Touring;
+  if (motivation === 'mountain_twisty')  return BIKE_TYPES.Cruiser;
+  if (motivation === 'weekend_escape')   return BIKE_TYPES.Cruiser;
+  if (experience === 'beginner')         return BIKE_TYPES.Cruiser;
+  return BIKE_TYPES.Cruiser;
 }
 
 function getRouteDescription(slug, city, motivation, season, vibe, experience) {
@@ -1767,7 +1720,7 @@ function getRouteDescription(slug, city, motivation, season, vibe, experience) {
 // =====================================================================
 
 function buildRentalURL(slug, bikeType, isFlyTo, destination) {
-  const base = `https://www.riders-share.com/listings/${slug}`;
+  const base = `https://www.riders-share.com/listings/${slug}/${bikeType.searchType}`;
   const delivery = isFlyTo ? '/del250' : '';
   const utm = `?utm_source=quiz&utm_medium=motorcycle-trip-quiz&utm_campaign=find-your-ride&utm_content=${destination}`;
   return base + delivery + utm;
