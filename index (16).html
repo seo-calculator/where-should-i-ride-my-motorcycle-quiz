@@ -1,0 +1,2038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Where Should I Ride My Motorcycle? | Riders Share Trip Planner Quiz</title>
+<meta name="description" content="Find your perfect motorcycle road trip destination with our free quiz. Answer 7 questions and get personalized route recommendations, bike suggestions, and rental links for your next adventure.">
+<meta name="keywords" content="motorcycle road trip planner, where to ride a motorcycle, best motorcycle roads USA, motorcycle trip ideas, motorcycle vacation planner">
+<meta property="og:title" content="Where Should I Ride My Motorcycle? | Riders Share">
+<meta property="og:description" content="Answer 7 questions and discover your perfect motorcycle destination, route, and rental bike.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seo-calculator.github.io/riders-share-trip-quiz/">
+<meta property="og:image" content="https://images.prismic.io/riders-sharecom/aRyKgGGnmrmGp_Hh_logo_black_background_v2.png?auto=format,compress">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --rs-blue: #1678c2;
+  --rs-blue-dark: #1260a0;
+  --rs-blue-light: #e8f2fb;
+  --rs-blue-mid: #3d8fd0;
+  --accent: #f5a623;
+  --accent-dark: #e0951a;
+  --dark: #1a1a2e;
+  --mid: #2d3748;
+  --text: #2c3e50;
+  --text-light: #596878;
+  --bg: #f7f9fc;
+  --white: #ffffff;
+  --card-shadow: 0 4px 20px rgba(22,120,194,0.10);
+  --card-shadow-hover: 0 8px 32px rgba(22,120,194,0.18);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --border: #dde3ed;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* HEADER */
+.site-header {
+  background: #0d1117;
+  padding: 14px 0;
+  text-align: center;
+  border-bottom: 3px solid var(--rs-blue);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+}
+.site-header img {
+  height: 36px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, #0d1117 0%, #1a2744 50%, #0d2340 100%);
+  color: white;
+  padding: 56px 20px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(22,120,194,0.25) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 50%, rgba(22,120,194,0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-road {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: repeating-linear-gradient(90deg, var(--rs-blue) 0px, var(--rs-blue) 40px, transparent 40px, transparent 70px);
+  opacity: 0.5;
+}
+.hero-badge {
+  display: inline-block;
+  background: rgba(22,120,194,0.25);
+  border: 1px solid rgba(22,120,194,0.5);
+  color: #7ec8f5;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 5px 16px;
+  border-radius: 50px;
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+.hero h1 span { color: var(--rs-blue); }
+.hero p {
+  font-size: clamp(15px, 2.5vw, 18px);
+  color: rgba(255,255,255,0.78);
+  max-width: 560px;
+  margin: 0 auto 28px;
+}
+.hero-meta {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+}
+.hero-meta span { display: flex; align-items: center; gap: 6px; }
+.hero-meta svg { width: 15px; height: 15px; fill: var(--rs-blue); flex-shrink: 0; }
+
+/* MAIN WRAPPER */
+.quiz-wrapper {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 16px 60px;
+}
+
+/* PROGRESS */
+.progress-section {
+  background: white;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  padding: 20px 28px;
+  box-shadow: var(--card-shadow);
+  margin-bottom: 28px;
+  position: sticky;
+  top: 67px;
+  z-index: 90;
+}
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.progress-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-light);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.progress-count {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--rs-blue);
+}
+.progress-bar-track {
+  height: 6px;
+  background: var(--rs-blue-light);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--rs-blue), var(--rs-blue-mid));
+  border-radius: 6px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.progress-dots {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+  justify-content: center;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: all 0.3s;
+}
+.dot.answered { background: var(--rs-blue); }
+.dot.active { background: var(--rs-blue); box-shadow: 0 0 0 3px rgba(22,120,194,0.2); transform: scale(1.25); }
+
+/* QUESTION CARD */
+.question-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+  padding: 36px 36px 32px;
+  animation: slideUp 0.4s ease;
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.q-number {
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--rs-blue);
+  margin-bottom: 10px;
+}
+.q-text {
+  font-size: clamp(20px, 3.5vw, 26px);
+  font-weight: 900;
+  color: var(--dark);
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+.q-sub {
+  font-size: 14px;
+  color: var(--text-light);
+  margin-bottom: 28px;
+}
+
+/* ANSWER OPTIONS */
+.options-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr;
+}
+.option-btn {
+  background: white;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.option-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--rs-blue-light);
+  opacity: 0;
+  transition: opacity 0.22s;
+}
+.option-btn:hover {
+  border-color: var(--rs-blue);
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-1px);
+}
+.option-btn:hover::before { opacity: 1; }
+.option-btn.selected {
+  border-color: var(--rs-blue);
+  background: var(--rs-blue-light);
+  box-shadow: 0 0 0 3px rgba(22,120,194,0.15);
+}
+.option-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: var(--rs-blue-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  transition: background 0.22s;
+}
+.option-btn.selected .option-icon { background: rgba(22,120,194,0.15); }
+.option-text {
+  position: relative;
+  z-index: 1;
+}
+.option-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 2px;
+}
+.option-desc {
+  font-size: 13px;
+  color: var(--text-light);
+}
+.option-check {
+  margin-left: auto;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  transition: all 0.22s;
+}
+.option-btn.selected .option-check {
+  background: var(--rs-blue);
+  border-color: var(--rs-blue);
+}
+.option-btn.selected .option-check::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 5px;
+  width: 8px;
+  height: 5px;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(-45deg);
+}
+
+/* NAV BUTTONS */
+.nav-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 28px;
+  gap: 12px;
+}
+.btn-back {
+  background: transparent;
+  border: 2px solid var(--border);
+  color: var(--text-light);
+  padding: 12px 22px;
+  border-radius: var(--radius);
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-back:hover { border-color: var(--rs-blue); color: var(--rs-blue); }
+.btn-next {
+  background: var(--rs-blue);
+  border: none;
+  color: white;
+  padding: 14px 32px;
+  border-radius: var(--radius);
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+.btn-next:hover { background: var(--rs-blue-dark); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(22,120,194,0.35); }
+.btn-next:disabled { background: #a0b4c8; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* RESULTS PAGE */
+.result-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  animation: slideUp 0.5s ease;
+}
+.result-header {
+  background: linear-gradient(135deg, #0d1117 0%, #1a2744 100%);
+  color: white;
+  padding: 36px 36px 32px;
+  position: relative;
+  overflow: hidden;
+}
+.result-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(22,120,194,0.3) 0%, transparent 60%);
+}
+.result-destination-label {
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--rs-blue);
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+.result-title {
+  font-size: clamp(24px, 4vw, 34px);
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+.result-route {
+  font-size: 16px;
+  color: rgba(255,255,255,0.7);
+  position: relative;
+  z-index: 1;
+  margin-bottom: 16px;
+}
+.result-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+.result-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  background: rgba(22,120,194,0.25);
+  border: 1px solid rgba(22,120,194,0.4);
+  color: #7ec8f5;
+}
+.result-body {
+  padding: 32px 36px;
+}
+.result-description {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--text);
+  margin-bottom: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+}
+.result-bike {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: var(--rs-blue-light);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 28px;
+}
+.result-bike-icon { font-size: 36px; flex-shrink: 0; }
+.result-bike-info {}
+.result-bike-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--rs-blue); margin-bottom: 4px; }
+.result-bike-title { font-size: 18px; font-weight: 900; color: var(--dark); margin-bottom: 4px; }
+.result-bike-desc { font-size: 14px; color: var(--text-light); }
+
+/* TOURING PROFILE */
+.touring-profile {
+  background: var(--dark);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 28px;
+}
+.touring-profile-heading {
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--rs-blue);
+  margin-bottom: 16px;
+}
+.touring-profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.tp-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.tp-item.tp-full {
+  grid-column: 1 / -1;
+}
+.tp-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.tp-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 3px;
+}
+.tp-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.35;
+}
+.tp-value.tp-highlight {
+  color: #7ec8f5;
+}
+@media (max-width: 480px) {
+  .touring-profile-grid { grid-template-columns: 1fr; }
+  .tp-item.tp-full { grid-column: 1; }
+}
+
+/* CTA BUTTONS */
+.cta-stack { display: flex; flex-direction: column; gap: 12px; }
+.cta-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--rs-blue);
+  color: white;
+  text-decoration: none;
+  padding: 18px 28px;
+  border-radius: var(--radius);
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  transition: all 0.2s;
+  text-align: center;
+  line-height: 1.3;
+}
+.cta-primary:hover { background: var(--rs-blue-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(22,120,194,0.35); }
+.cta-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: white;
+  color: var(--rs-blue);
+  text-decoration: none;
+  padding: 16px 28px;
+  border-radius: var(--radius);
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  border: 2px solid var(--rs-blue);
+  transition: all 0.2s;
+  text-align: center;
+}
+.cta-secondary:hover { background: var(--rs-blue-light); }
+.cta-retake {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--text-light);
+  border: 2px solid var(--border);
+  padding: 14px 20px;
+  border-radius: var(--radius);
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+.cta-retake:hover { border-color: var(--rs-blue); color: var(--rs-blue); }
+
+/* SHARE */
+.share-section {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+.share-label { font-size: 13px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+.share-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.share-btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: white;
+}
+.share-fb { background: #1877f2; }
+.share-tw { background: #1da1f2; }
+.share-copy { background: var(--mid); }
+.share-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+/* ALTERNATIVE RESULTS */
+.alt-results {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.alt-title { font-size: 14px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+.alt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+.alt-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+.alt-card:hover { border-color: var(--rs-blue); box-shadow: var(--card-shadow); }
+.alt-card-route { font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+.alt-card-city { font-size: 12px; color: var(--text-light); }
+
+/* CITY LINKS */
+.city-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.city-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--rs-blue-light);
+  color: var(--rs-blue);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 7px 14px;
+  border-radius: 20px;
+  transition: all 0.2s;
+  border: 1px solid rgba(22,120,194,0.2);
+}
+.city-link:hover { background: var(--rs-blue); color: white; }
+
+/* FOOTER */
+.site-footer {
+  background: #0d1117;
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  padding: 28px 20px;
+  font-size: 13px;
+  margin-top: 60px;
+  border-top: 3px solid var(--rs-blue);
+}
+.site-footer a { color: var(--rs-blue); text-decoration: none; }
+.site-footer a:hover { text-decoration: underline; }
+.site-footer p { margin-bottom: 6px; }
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .question-card { padding: 24px 20px 20px; }
+  .result-header { padding: 28px 20px 24px; }
+  .result-body { padding: 24px 20px; }
+  .seo-section { padding: 28px 20px; }
+  .hero { padding: 40px 16px 36px; }
+  .hero-meta { gap: 14px; }
+  .progress-section { padding: 14px 16px; }
+  .nav-row { flex-direction: column-reverse; }
+  .btn-back { width: 100%; justify-content: center; }
+  .btn-next { width: 100%; justify-content: center; margin-left: 0; }
+  .alt-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 600px) {
+  .options-grid { grid-template-columns: 1fr 1fr; }
+  .options-grid.single-col { grid-template-columns: 1fr; }
+}
+
+.loading-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(13,17,23,0.7);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+}
+.loading-overlay.active { display: flex; }
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid rgba(255,255,255,0.2);
+  border-top-color: var(--rs-blue);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
+
+<!-- JSON-LD Schema Markup -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://seo-calculator.github.io/riders-share-trip-quiz/#app",
+      "name": "Where Should I Ride My Motorcycle? - Riders Share Trip Planner Quiz",
+      "url": "https://seo-calculator.github.io/riders-share-trip-quiz/",
+      "description": "Answer 7 questions and get a personalized motorcycle road trip destination, route recommendation, and rental bike suggestion powered by the Riders Share peer-to-peer motorcycle rental marketplace.",
+      "applicationCategory": "TravelApplication",
+      "operatingSystem": "Web Browser",
+      "isAccessibleForFree": true,
+      "creator": {
+        "@type": "Organization",
+        "name": "RiZen Metrics",
+        "url": "https://www.rizenmetrics.com/"
+      },
+      "sourceOrganization": {
+        "@type": "Organization",
+        "name": "Riders Share",
+        "url": "https://www.riders-share.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://images.prismic.io/riders-sharecom/aRyKgGGnmrmGp_Hh_logo_black_background_v2.png?auto=format,compress"
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://seo-calculator.github.io/riders-share-trip-quiz/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What are the best motorcycle roads in the USA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The best motorcycle roads in the USA include the Pacific Coast Highway in California (600 miles of coastal cliffs and Big Sur), the Tail of the Dragon in Tennessee/North Carolina (318 curves in 11 miles), the Blue Ridge Parkway in Virginia/North Carolina (469 miles of mountain vistas), the Beartooth Highway in Montana (68 miles reaching 10,947 feet), and the Going-to-the-Sun Road in Glacier National Park. Regional favorites include the Three Twisted Sisters in Texas Hill Country, the Million Dollar Highway in Colorado, and the Columbia River Gorge in Oregon."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where should I go on a motorcycle road trip for beginners?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Beginners are best served by flat, wide routes with light traffic. Top beginner-friendly motorcycle destinations include the Natchez Trace Parkway (no commercial traffic), the Great River Road along the Mississippi, Skyline Drive in Shenandoah National Park, the Overseas Highway in Florida (flat, scenic), and the Blue Ridge Parkway at lower elevations. Stick to cruiser or standard motorcycles under 500cc and choose routes rated for Cruiser or Touring bikes rather than Sport or ADV."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What motorcycle is best for a long road trip?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For long motorcycle road trips, the best options are touring bikes like the Harley-Davidson Road Glide, BMW R 1250 RT, or Honda Gold Wing for maximum comfort over multi-day rides. Cruisers like the Harley-Davidson Street Glide or Indian Chieftain work well for 2-5 day trips. Adventure bikes like the BMW GS or KTM Adventure are ideal if your route includes mountain passes or unpaved sections. You can rent touring and cruiser motorcycles by the day or week through Riders Share in most major US cities."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the best time of year for a motorcycle road trip?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The best season for motorcycle road trips varies by region. In the Southwest (AZ, NV, TX, FL), October through April offers the most comfortable riding temperatures. In the Southeast (TN, NC, VA), spring (March-May) and fall (September-November) bring the best conditions and fall foliage. Pacific Coast and Mountain West riding peaks June through September when passes are clear. The Northeast and Midwest peak May through October. Winter riders should head to Florida, Texas, or Arizona, where year-round routes like the Overseas Highway and Natchez Trace remain open."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I rent a motorcycle for a road trip?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Riders Share is the largest peer-to-peer motorcycle rental marketplace in the USA, with thousands of motorcycles available for daily or weekly rental in cities across the country. You can rent cruisers, touring bikes, adventure bikes, sport bikes, and standards from local owners, often at significantly lower prices than traditional rental agencies. Simply book online, pick up from the owner, and ride. Delivery options are also available at select locations for airport or hotel pickup."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I plan a motorcycle road trip route?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Planning a motorcycle road trip starts with choosing a destination region and trip length. For a weekend trip, focus on routes within 200-300 miles of a rental hub city. For a week-long adventure, target a cross-regional route like the Blue Ridge Parkway or Pacific Coast Highway. Match your route to your experience level, choosing technical sport routes like the Tail of the Dragon only if you have 3+ years of riding experience. Always check seasonal closures, especially for mountain passes above 10,000 feet, and plan fuel stops as some scenic routes pass through remote areas with limited services."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Riders Share?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Riders Share is the USA's largest peer-to-peer motorcycle rental and sharing marketplace. It connects motorcycle owners who want to earn money from their bikes with riders who want to rent without buying. Available motorcycles include Harley-Davidson, BMW, Honda, Indian, Triumph, Ducati, Kawasaki, Yamaha, and more. Rentals are available by the hour, day, or week in hundreds of US cities. Riders Share also offers guided motorcycle tours and experiences in select markets."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the most scenic motorcycle road in the US?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "According to riders and travel authorities, the Pacific Coast Highway (US-1) in California is consistently ranked the most scenic motorcycle road in the US, featuring 600 miles of coastal cliffs, redwood forests, and Big Sur. Other top contenders include the Going-to-the-Sun Road in Glacier National Park, the Beartooth Highway in Montana (reaching nearly 11,000 feet), the Blue Ridge Parkway in Virginia and North Carolina, and the Million Dollar Highway in Colorado, which climbs to 11,018 feet through former mining towns."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Riders Share",
+          "item": "https://www.riders-share.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Motorcycle Trip Planner Quiz",
+          "item": "https://seo-calculator.github.io/riders-share-trip-quiz/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- LOADING OVERLAY -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <a href="https://www.riders-share.com" target="_blank" rel="noopener">
+    <img src="https://images.prismic.io/riders-sharecom/aRyKgGGnmrmGp_Hh_logo_black_background_v2.png?auto=format,compress" alt="Riders Share - Motorcycle Rental Marketplace" height="36">
+  </a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-road"></div>
+  <div class="hero-badge">Free Trip Planner Quiz</div>
+  <h1>Where Should I Ride My<br><span>Motorcycle?</span></h1>
+  <p>Answer 7 quick questions and get a personalized destination, route, and rental recommendation for your next ride.</p>
+  <div class="hero-meta">
+    <span>
+      <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+      135 US Destinations
+    </span>
+    <span>
+      <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm0 18a8 8 0 110-16 8 8 0 010 16zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+      Takes Under 2 Minutes
+    </span>
+    <span>
+      <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+      77 Iconic Routes Mapped
+    </span>
+  </div>
+</section>
+
+<!-- QUIZ WRAPPER -->
+<div class="quiz-wrapper">
+  <!-- PROGRESS -->
+  <div class="progress-section" id="progressSection">
+    <div class="progress-header">
+      <span class="progress-label">Your Progress</span>
+      <span class="progress-count" id="progressCount">Question 1 of 7</span>
+    </div>
+    <div class="progress-bar-track">
+      <div class="progress-bar-fill" id="progressBar" style="width: 0%"></div>
+    </div>
+    <div class="progress-dots" id="progressDots"></div>
+  </div>
+
+  <!-- QUESTION CONTAINER -->
+  <div id="quizContainer">
+    <!-- Injected by JS -->
+  </div>
+
+  <!-- RESULT CONTAINER -->
+  <div id="resultContainer" style="display:none;"></div>
+</div>
+
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <p>Built for <a href="https://www.riders-share.com" target="_blank" rel="noopener">Riders Share</a> by <a href="https://www.rizenmetrics.com/" target="_blank" rel="noopener">RiZen Metrics</a></p>
+  <p>&copy; 2026 Riders Share. All rights reserved. | <a href="https://www.riders-share.com/terms" target="_blank" rel="noopener">Terms</a> | <a href="https://www.riders-share.com/privacy" target="_blank" rel="noopener">Privacy</a></p>
+</footer>
+
+<script>
+// =====================================================================
+// STEP 1: DATA OBJECTS
+// =====================================================================
+
+const FLY_TO_MARKETS = new Set([
+  'las-vegas-nv','honolulu-hi','billings-mt','missoula-mt','rapid-city-sd',
+  'anchorage-ak','durango-co','santa-fe-nm','flagstaff-az','key-west-fl',
+  'bozeman-mt','jackson-wy','moab-ut'
+]);
+
+// =====================================================================
+// TAG TAXONOMY
+// TERRAIN: coastal, mountain, canyon, desert, forest, plains, lake, island, river
+// RIDE_STYLE: twisty, technical, cruising, adventure_gravel, touring, beginner_friendly, sport, intermediate, advanced
+// VIBE: nature, food_culture, nightlife, history_culture, roadside_americana, beach, urban_gateway
+// SEASON: summer_peak, winter_friendly, spring_fall_best, year_round
+// DURATION: day_trip, weekend, week_plus
+// BIKE FIT: cruiser, touring, adventure, sport, standard
+// SCENIC: scenic_byway
+// =====================================================================
+
+// Answer -> tag weights (what each answer signals)
+const ANSWER_TAGS = {
+  motivation: {
+    scenic_cruise:    { coastal:3, scenic_byway:3, cruising:3, lake:2, plains:1, river:2, beginner_friendly:1 },
+    mountain_twisty:  { mountain:3, twisty:3, technical:2, canyon:2, sport:1 },
+    adventure_gravel: { adventure_gravel:4, mountain:2, forest:2, advanced:1, adventure:3 },
+    cross_country:    { week_plus:3, scenic_byway:2, touring:2, plains:1, river:1, history_culture:1 },
+    weekend_escape:   { day_trip:3, weekend:3, urban_gateway:2, beginner_friendly:1, year_round:1 }
+  },
+  duration: {
+    day:     { day_trip:4, weekend:2 },
+    weekend: { weekend:4, day_trip:1, week_plus:1 },
+    week:    { week_plus:4, weekend:1 },
+    epic:    { week_plus:5, scenic_byway:1, touring:1 }
+  },
+  season: {
+    spring: { spring_fall_best:3, year_round:2, winter_friendly:1 },
+    summer: { summer_peak:4, spring_fall_best:1, year_round:2 },
+    fall:   { spring_fall_best:4, year_round:2, winter_friendly:1 },
+    winter: { winter_friendly:5, year_round:3, summer_peak:-3, spring_fall_best:-1 }
+  },
+  experience: {
+    beginner:     { beginner_friendly:4, cruiser:2, standard:1, touring:1, advanced:-4, technical:-2 },
+    intermediate: { intermediate:3, beginner_friendly:1, advanced:-1, twisty:2, cruiser:1, sport:1 },
+    experienced:  { advanced:3, technical:3, twisty:2, sport:2, adventure_gravel:1, beginner_friendly:-1 }
+  },
+  group: {
+    solo:      { sport:1, adventure:1, adventure_gravel:1 },
+    passenger: { touring:3, cruiser:2, cruising:2, beginner_friendly:1 },
+    group:     { cruiser:2, touring:1, nightlife:2, food_culture:1, history_culture:1 }
+  },
+  vibe: {
+    nature:          { nature:5, forest:3, mountain:2, lake:2, coastal:1, scenic_byway:2 },
+    food_culture:    { food_culture:5, urban_gateway:2, nightlife:1, coastal:1, lake:1 },
+    technical:       { technical:5, twisty:4, sport:3, advanced:2, mountain:2 },
+    history_culture: { history_culture:5, roadside_americana:4, scenic_byway:2, plains:1, river:1 },
+    nightlife:       { nightlife:5, urban_gateway:3, food_culture:2, coastal:1, beach:1 }
+  }
+};
+
+// Brand tag profiles - drives getBrandProfile tag matching
+const BRAND_PROFILES = {
+  'HARLEY-DAVIDSON': { types:['Cruiser','Touring'], tags:['cruiser','touring','history_culture','roadside_americana','beginner_friendly','nightlife','food_culture'], emoji:'🦅', name:'Harley-Davidson' },
+  'HONDA':           { types:['Standard','Cruiser','Touring','Adventure'], tags:['standard','cruiser','beginner_friendly','touring','adventure','year_round'], emoji:'🏍', name:'Honda' },
+  'BMW':             { types:['Adventure','Touring'], tags:['adventure','touring','adventure_gravel','mountain','technical','week_plus'], emoji:'🏔', name:'BMW' },
+  'KAWASAKI':        { types:['Sport','Standard'], tags:['sport','standard','twisty','technical','mountain','intermediate'], emoji:'🏁', name:'Kawasaki' },
+  'INDIAN':          { types:['Cruiser','Touring'], tags:['cruiser','touring','history_culture','roadside_americana','cruising','week_plus'], emoji:'🌾', name:'Indian' },
+  'TRIUMPH':         { types:['Standard','Touring','Sport'], tags:['standard','sport','twisty','food_culture','urban_gateway','history_culture','touring'], emoji:'🇬🇧', name:'Triumph' },
+  'DUCATI':          { types:['Sport'], tags:['sport','technical','twisty','advanced','urban_gateway','coastal','nightlife'], emoji:'🔴', name:'Ducati' },
+  'KTM':             { types:['Adventure'], tags:['adventure','adventure_gravel','mountain','advanced','technical','week_plus'], emoji:'🧡', name:'KTM' }
+};
+
+const CITIES = {
+  // WEST COAST
+  'los-angeles-ca':    { name: 'Los Angeles, CA', region: 'west', roads: ['Pacific Coast Highway', 'Angeles Crest Highway', 'Mulholland Highway'], defaultBrands: ['HARLEY-DAVIDSON','BMW','HONDA'], types: ['Cruiser','Adventure','Touring'] },
+  'san-francisco-ca':  { name: 'San Francisco, CA', region: 'west', roads: ['Pacific Coast Highway', 'CA-1 Big Sur', 'Skyline Blvd'], defaultBrands: ['HARLEY-DAVIDSON','BMW','HONDA'], types: ['Cruiser','Touring','Adventure'] },
+  'san-diego-ca':      { name: 'San Diego, CA', region: 'west', roads: ['Palomar Mountain', 'Sunrise Highway', 'Ortega Highway'], defaultBrands: ['HARLEY-DAVIDSON','HONDA','KAWASAKI'], types: ['Cruiser','Sport','Standard'] },
+  'san-jose-ca':       { name: 'San Jose, CA', region: 'west', roads: ["CA-35 Skyline Blvd", "Mt Hamilton", "Alice's Restaurant Loop"], defaultBrands: ['HONDA','BMW','KAWASAKI'], types: ['Sport','Standard','Adventure'] },
+  'seattle-wa':        { name: 'Seattle, WA', region: 'west', roads: ['North Cascades Highway', 'Mt Rainier Loop', 'Olympic Peninsula'], defaultBrands: ['BMW','HONDA','HARLEY-DAVIDSON'], types: ['Adventure','Touring','Cruiser'] },
+  'portland-or':       { name: 'Portland, OR', region: 'west', roads: ['Columbia River Gorge', 'Mt Hood Loop', 'Oregon Coast US-101'], defaultBrands: ['BMW','HONDA','HARLEY-DAVIDSON'], types: ['Adventure','Touring','Cruiser'] },
+  'sacramento-ca':     { name: 'Sacramento, CA', region: 'west', roads: ['CA-49 Gold Country', 'Yosemite Loop', 'Lake Tahoe Loop'], defaultBrands: ['HARLEY-DAVIDSON','HONDA','BMW'], types: ['Cruiser','Touring','Adventure'] },
+  'long-beach-ca':     { name: 'Long Beach, CA', region: 'west', roads: ['Pacific Coast Highway', 'Ortega Highway', 'Glendora Mountain Rd'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Standard'] },
+  'oakland-ca':        { name: 'Oakland, CA', region: 'west', roads: ['Skyline Blvd', 'Mt Diablo', 'CA-1 Coast'], defaultBrands: ['HONDA','BMW','HARLEY-DAVIDSON'], types: ['Standard','Adventure','Cruiser'] },
+  'fresno-ca':         { name: 'Fresno, CA', region: 'west', roads: ['Yosemite CA-41', 'Kings Canyon', 'Generals Highway'], defaultBrands: ['HONDA','BMW'], types: ['Adventure','Touring'] },
+  'bakersfield-ca':    { name: 'Bakersfield, CA', region: 'west', roads: ['Kern River Canyon', 'Walker Pass', 'CA-58'], defaultBrands: ['HONDA','HARLEY-DAVIDSON'], types: ['Cruiser','Standard'] },
+  'anaheim-ca':        { name: 'Anaheim, CA', region: 'west', roads: ['Ortega Highway', 'Santiago Canyon', 'Pacific Coast Highway'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Standard'] },
+  'santa-ana-ca':      { name: 'Santa Ana, CA', region: 'west', roads: ['Ortega Highway', 'Laguna Canyon', 'Pacific Coast Highway'], defaultBrands: ['HONDA','HARLEY-DAVIDSON'], types: ['Standard','Cruiser'] },
+  'irvine-ca':         { name: 'Irvine, CA', region: 'west', roads: ['Ortega Highway', 'Pacific Coast Highway', 'Santiago Canyon'], defaultBrands: ['BMW','HONDA','KAWASAKI'], types: ['Sport','Standard','Adventure'] },
+  'riverside-ca':      { name: 'Riverside, CA', region: 'west', roads: ['Palomar Mountain', 'Ortega Highway', 'CA-74'], defaultBrands: ['HONDA','KAWASAKI','HARLEY-DAVIDSON'], types: ['Sport','Standard','Cruiser'] },
+  'stockton-ca':       { name: 'Stockton, CA', region: 'west', roads: ['CA-49 Gold Country', 'Ebbetts Pass', 'Sonora Pass'], defaultBrands: ['HONDA','BMW'], types: ['Adventure','Touring'] },
+  'chula-vista-ca':    { name: 'Chula Vista, CA', region: 'west', roads: ['Sunrise Highway', 'Palomar Mountain', 'Border to Big Sur'], defaultBrands: ['HONDA','HARLEY-DAVIDSON'], types: ['Cruiser','Standard'] },
+  'fremont-ca':        { name: 'Fremont, CA', region: 'west', roads: ['CA-35 Skyline', 'Mt Hamilton', 'CA-130'], defaultBrands: ['HONDA','BMW','KAWASAKI'], types: ['Sport','Standard'] },
+  'modesto-ca':        { name: 'Modesto, CA', region: 'west', roads: ['CA-49 Gold Country', 'Yosemite', 'Ebbetts Pass'], defaultBrands: ['HONDA','HARLEY-DAVIDSON'], types: ['Cruiser','Touring'] },
+  'tacoma-wa':         { name: 'Tacoma, WA', region: 'west', roads: ['Mt Rainier Loop', 'Olympic Peninsula', 'Cascade Loop'], defaultBrands: ['BMW','HONDA'], types: ['Adventure','Touring'] },
+  'spokane-wa':        { name: 'Spokane, WA', region: 'west', roads: ['US-2 Northern Idaho', 'Lolo Pass', 'Lake Coeur d\'Alene'], defaultBrands: ['BMW','HARLEY-DAVIDSON'], types: ['Adventure','Cruiser'] },
+  'eugene-or':         { name: 'Eugene, OR', region: 'west', roads: ['McKenzie Pass', 'Aufderheide Scenic Byway', 'OR Coast'], defaultBrands: ['BMW','HONDA'], types: ['Adventure','Touring'] },
+  'salem-or':          { name: 'Salem, OR', region: 'west', roads: ['Silver Falls Loop', 'McKenzie Pass', 'OR Coast'], defaultBrands: ['HONDA','BMW'], types: ['Touring','Adventure'] },
+  'boise-id':          { name: 'Boise, ID', region: 'west', roads: ['Sawtooth Scenic Byway', 'Ponderosa Pine Scenic Byway', 'Lolo Pass'], defaultBrands: ['BMW','KTM','HONDA'], types: ['Adventure','Touring'] },
+  'anchorage-ak':      { name: 'Anchorage, AK', region: 'west', roads: ['Seward Highway', 'Denali Highway', 'Glenn Highway'], defaultBrands: ['BMW','KTM'], types: ['Adventure'] },
+  'honolulu-hi':       { name: 'Honolulu, HI', region: 'west', roads: ['North Shore Loop', 'Tantalus Drive', 'H-3 to Windward Side'], defaultBrands: ['HONDA','HARLEY-DAVIDSON'], types: ['Cruiser','Standard'] },
+  // MOUNTAIN WEST
+  'phoenix-az':        { name: 'Phoenix, AZ', region: 'mountain', roads: ['Apache Trail', 'US-89A Sedona', 'Beeline Highway'], defaultBrands: ['BMW','HARLEY-DAVIDSON','HONDA'], types: ['Adventure','Cruiser','Touring'] },
+  'denver-co':         { name: 'Denver, CO', region: 'mountain', roads: ['Trail Ridge Road', 'Independence Pass', 'Peak to Peak Highway'], defaultBrands: ['BMW','HARLEY-DAVIDSON','KTM'], types: ['Adventure','Touring','Cruiser'] },
+  'las-vegas-nv':      { name: 'Las Vegas, NV', region: 'mountain', roads: ['Valley of Fire', 'Red Rock Canyon', 'Mt Charleston', 'Death Valley'], defaultBrands: ['HARLEY-DAVIDSON','BMW','HONDA'], types: ['Cruiser','Adventure','Touring'] },
+  'colorado-springs-co': { name: 'Colorado Springs, CO', region: 'mountain', roads: ['Pikes Peak Highway', 'US-50', 'Independence Pass'], defaultBrands: ['BMW','HARLEY-DAVIDSON'], types: ['Adventure','Cruiser'] },
+  'tucson-az':         { name: 'Tucson, AZ', region: 'mountain', roads: ['Mt Lemmon Highway', 'Gates Pass', 'Saguaro Loop'], defaultBrands: ['BMW','HONDA','HARLEY-DAVIDSON'], types: ['Adventure','Cruiser'] },
+  'mesa-az':           { name: 'Mesa, AZ', region: 'mountain', roads: ['Apache Trail', 'Beeline Highway', 'US-60 to Globe'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Adventure'] },
+  'albuquerque-nm':    { name: 'Albuquerque, NM', region: 'mountain', roads: ['Sandia Crest', 'Turquoise Trail', 'Enchanted Circle'], defaultBrands: ['BMW','HARLEY-DAVIDSON','KTM'], types: ['Adventure','Touring','Cruiser'] },
+  'aurora-co':         { name: 'Aurora, CO', region: 'mountain', roads: ['Trail Ridge Road', 'Peak to Peak', 'Guanella Pass'], defaultBrands: ['BMW','HARLEY-DAVIDSON'], types: ['Adventure','Cruiser'] },
+  'henderson-nv':      { name: 'Henderson, NV', region: 'mountain', roads: ['Valley of Fire', 'Red Rock Canyon', 'Lake Mead Loop'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Standard'] },
+  'chandler-az':       { name: 'Chandler, AZ', region: 'mountain', roads: ['Apache Trail', 'Beeline Highway', 'Globe-Miami'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Adventure'] },
+  'scottsdale-az':     { name: 'Scottsdale, AZ', region: 'mountain', roads: ['Apache Trail', 'US-89A Sedona', 'Beeline Highway'], defaultBrands: ['HARLEY-DAVIDSON','BMW','INDIAN'], types: ['Cruiser','Touring','Adventure'] },
+  'gilbert-az':        { name: 'Gilbert, AZ', region: 'mountain', roads: ['Apache Trail', 'Globe-Miami', 'US-60'], defaultBrands: ['HONDA','HARLEY-DAVIDSON'], types: ['Cruiser','Standard'] },
+  'glendale-az':       { name: 'Glendale, AZ', region: 'mountain', roads: ['US-89A Sedona', 'Prescott Loop', 'Apache Trail'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Touring'] },
+  'reno-nv':           { name: 'Reno, NV', region: 'mountain', roads: ['Lake Tahoe Loop', 'Geiger Grade', 'US-50 Loneliest Road'], defaultBrands: ['HARLEY-DAVIDSON','BMW','HONDA'], types: ['Cruiser','Touring','Adventure'] },
+  'north-las-vegas-nv':{ name: 'North Las Vegas, NV', region: 'mountain', roads: ['Valley of Fire', 'Red Rock Canyon', 'Extraterrestrial Highway'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Standard'] },
+  'salt-lake-city-ut': { name: 'Salt Lake City, UT', region: 'mountain', roads: ['Mirror Lake Highway', 'Logan Canyon', 'Flaming Gorge'], defaultBrands: ['BMW','HARLEY-DAVIDSON','KTM'], types: ['Adventure','Touring','Cruiser'] },
+  'provo-ut':          { name: 'Provo, UT', region: 'mountain', roads: ['Alpine Loop', 'Mirror Lake Highway', 'US-89'], defaultBrands: ['BMW','HONDA'], types: ['Adventure','Touring'] },
+  'billings-mt':       { name: 'Billings, MT', region: 'mountain', roads: ['Beartooth Highway', 'Chief Joseph Highway', 'Going-to-the-Sun Road'], defaultBrands: ['BMW','HARLEY-DAVIDSON','KTM'], types: ['Adventure','Touring'] },
+  'missoula-mt':       { name: 'Missoula, MT', region: 'mountain', roads: ['Going-to-the-Sun Road', 'Lolo Pass', 'Flathead Lake Loop'], defaultBrands: ['BMW','KTM','HARLEY-DAVIDSON'], types: ['Adventure','Touring'] },
+  'santa-fe-nm':       { name: 'Santa Fe, NM', region: 'mountain', roads: ['High Road to Taos', 'Enchanted Circle', 'Turquoise Trail'], defaultBrands: ['BMW','HARLEY-DAVIDSON','INDIAN'], types: ['Touring','Cruiser','Adventure'] },
+  'flagstaff-az':      { name: 'Flagstaff, AZ', region: 'mountain', roads: ['US-89A Oak Creek Canyon', 'Route 66', 'Sedona Loop'], defaultBrands: ['BMW','HARLEY-DAVIDSON'], types: ['Adventure','Touring'] },
+  'rapid-city-sd':     { name: 'Rapid City, SD', region: 'mountain', roads: ['Needles Highway', 'Iron Mountain Road', 'Spearfish Canyon'], defaultBrands: ['HARLEY-DAVIDSON','INDIAN','HONDA'], types: ['Cruiser','Touring'] },
+  'durango-co':        { name: 'Durango, CO', region: 'mountain', roads: ['Million Dollar Highway', 'Red Mountain Pass', 'Mesa Verde'], defaultBrands: ['BMW','HARLEY-DAVIDSON','KTM'], types: ['Adventure','Touring'] },
+  // SOUTH / SOUTHEAST
+  'houston-tx':        { name: 'Houston, TX', region: 'south', roads: ['Three Twisted Sisters', 'TX-16', 'US-290'], defaultBrands: ['HARLEY-DAVIDSON','INDIAN','HONDA'], types: ['Cruiser','Touring','Adventure'] },
+  'san-antonio-tx':    { name: 'San Antonio, TX', region: 'south', roads: ['Three Twisted Sisters', 'Willow City Loop', 'TX Hill Country'], defaultBrands: ['HARLEY-DAVIDSON','INDIAN','HONDA'], types: ['Cruiser','Touring'] },
+  'dallas-tx':         { name: 'Dallas, TX', region: 'south', roads: ['TX-16 Hill Country', 'Twisted Sisters', 'Possum Kingdom Lake Loop'], defaultBrands: ['HARLEY-DAVIDSON','HONDA','BMW'], types: ['Cruiser','Touring','Standard'] },
+  'austin-tx':         { name: 'Austin, TX', region: 'south', roads: ['Willow City Loop', 'Three Twisted Sisters', 'Lime Creek Road'], defaultBrands: ['HARLEY-DAVIDSON','HONDA','BMW'], types: ['Cruiser','Standard','Adventure'] },
+  'jacksonville-fl':   { name: 'Jacksonville, FL', region: 'south', roads: ['A1A Scenic', 'Ormond Scenic Loop', 'Overseas Highway'], defaultBrands: ['HARLEY-DAVIDSON','HONDA','INDIAN'], types: ['Cruiser','Touring'] },
+  'charlotte-nc':      { name: 'Charlotte, NC', region: 'south', roads: ['Blue Ridge Parkway', 'Tail of the Dragon', 'Cherohala Skyway'], defaultBrands: ['HARLEY-DAVIDSON','BMW','HONDA'], types: ['Cruiser','Touring','Sport'] },
+  'fort-worth-tx':     { name: 'Fort Worth, TX', region: 'south', roads: ['TX Hill Country', 'Twisted Sisters', 'Palo Pinto Loop'], defaultBrands: ['HARLEY-DAVIDSON','INDIAN'], types: ['Cruiser','Touring'] },
+  'nashville-tn':      { name: 'Nashville, TN', region: 'south', roads: ['Natchez Trace Parkway', 'Tail of the Dragon', 'Cherohala Skyway'], defaultBrands: ['HARLEY-DAVIDSON','INDIAN','BMW'], types: ['Cruiser','Touring','Standard'] },
+  'el-paso-tx':        { name: 'El Paso, TX', region: 'south', roads: ['Franklin Mountains', 'TX-170 River Road', 'Guadalupe Mountains'], defaultBrands: ['HARLEY-DAVIDSON','BMW'], types: ['Cruiser','Adventure'] },
+  'memphis-tn':        { name: 'Memphis, TN', region: 'south', roads: ['Natchez Trace Parkway', 'Cherohala Skyway', 'AR-7'], defaultBrands: ['HARLEY-DAVIDSON','INDIAN'], types: ['Cruiser','Touring'] },
+  'louisville-ky':     { name: 'Louisville, KY', region: 'south', roads: ['Red River Gorge', 'KY-80', 'Daniel Boone NF Loop'], defaultBrands: ['HARLEY-DAVIDSON','HONDA','BMW'], types: ['Cruiser','Touring','Adventure'] },
+  'oklahoma-city-ok':  { name: 'Oklahoma City, OK', region: 'south', roads: ['Talimena Scenic Drive', 'Wichita Mountains', 'Route 66'], defaultBrands: ['HARLEY-DAVIDSON','INDIAN','HONDA'], types: ['Cruiser','Touring'] },
+  'atlanta-ga':        { name: 'Atlanta, GA', region: 'south', roads: ['Blue Ridge Parkway', 'Blood Mountain', 'Tail of the Dragon'], defaultBrands: ['HARLEY-DAVIDSON','BMW','HONDA'], types: ['Cruiser','Sport','Adventure'] },
+  'miami-fl':          { name: 'Miami, FL', region: 'south', roads: ['Overseas Highway US-1 to Key West', 'A1A', 'Everglades Loop'], defaultBrands: ['HARLEY-DAVIDSON','HONDA','DUCATI'], types: ['Cruiser','Touring','Standard'] },
+  'tampa-fl':          { name: 'Tampa, FL', region: 'south', roads: ['Ozello Trail', 'A1A', 'Sugarloaf Mountain Loop'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Standard'] },
+  'orlando-fl':        { name: 'Orlando, FL', region: 'south', roads: ['A1A Daytona', 'Ormond Scenic Loop', 'Overseas Highway'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Touring'] },
+  'new-orleans-la':    { name: 'New Orleans, LA', region: 'south', roads: ['Natchez Trace Parkway', 'River Road LA', 'Creole Nature Trail'], defaultBrands: ['HARLEY-DAVIDSON','INDIAN'], types: ['Cruiser','Touring'] },
+  'raleigh-nc':        { name: 'Raleigh, NC', region: 'south', roads: ['Blue Ridge Parkway', 'US-221', 'Cherohala Skyway'], defaultBrands: ['HARLEY-DAVIDSON','BMW','HONDA'], types: ['Touring','Cruiser'] },
+  'virginia-beach-va': { name: 'Virginia Beach, VA', region: 'south', roads: ['Blue Ridge Parkway', 'Skyline Drive', 'US-58'], defaultBrands: ['HARLEY-DAVIDSON','INDIAN','HONDA'], types: ['Cruiser','Touring'] },
+  'norfolk-va':        { name: 'Norfolk, VA', region: 'south', roads: ['Blue Ridge Parkway', 'Skyline Drive', 'Colonial Parkway'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Touring'] },
+  'richmond-va':       { name: 'Richmond, VA', region: 'south', roads: ['Blue Ridge Parkway', 'Skyline Drive', 'VA-39 Goshen Pass'], defaultBrands: ['HARLEY-DAVIDSON','BMW'], types: ['Cruiser','Touring'] },
+  'chesapeake-va':     { name: 'Chesapeake, VA', region: 'south', roads: ['Blue Ridge Parkway', 'Skyline Drive', 'Outer Banks NC-12'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Touring'] },
+  'durham-nc':         { name: 'Durham, NC', region: 'south', roads: ['Blue Ridge Parkway', 'US-276', 'Cherohala Skyway'], defaultBrands: ['HARLEY-DAVIDSON','BMW'], types: ['Touring','Cruiser'] },
+  'greensboro-nc':     { name: 'Greensboro, NC', region: 'south', roads: ['Blue Ridge Parkway', 'US-421 Snake', 'Cherohala Skyway'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Touring'] },
+  'winston-salem-nc':  { name: 'Winston-Salem, NC', region: 'south', roads: ['Blue Ridge Parkway', 'US-421 Snake', 'Diamondback'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Touring'] },
+  'st-petersburg-fl':  { name: 'St. Petersburg, FL', region: 'south', roads: ['Ozello Trail', 'Suncoast Trail', 'A1A'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Standard'] },
+  'corpus-christi-tx': { name: 'Corpus Christi, TX', region: 'south', roads: ['TX Hill Country', 'TX-16', 'Padre Island'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Standard'] },
+  'lexington-ky':      { name: 'Lexington, KY', region: 'south', roads: ['Red River Gorge', 'KY-80', 'Bourbon Trail Loop'], defaultBrands: ['HARLEY-DAVIDSON','BMW','INDIAN'], types: ['Cruiser','Touring'] },
+  'knoxville-tn':      { name: 'Knoxville, TN', region: 'south', roads: ['Tail of the Dragon', 'Cherohala Skyway', 'Blue Ridge Parkway'], defaultBrands: ['HARLEY-DAVIDSON','KAWASAKI','BMW'], types: ['Sport','Cruiser','Touring'] },
+  'chattanooga-tn':    { name: 'Chattanooga, TN', region: 'south', roads: ['Tail of the Dragon', 'Cherohala Skyway', 'Lookout Mountain'], defaultBrands: ['HARLEY-DAVIDSON','KAWASAKI','HONDA'], types: ['Sport','Cruiser'] },
+  'savannah-ga':       { name: 'Savannah, GA', region: 'south', roads: ['GA-197 Richard Russell Scenic', 'Blood Mountain', 'A1A'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Standard'] },
+  'birmingham-al':     { name: 'Birmingham, AL', region: 'south', roads: ['Cheaha State Park', 'Natchez Trace', 'AL-176 Scenic'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Touring'] },
+  'mobile-al':         { name: 'Mobile, AL', region: 'south', roads: ['Natchez Trace', 'Gulf Shores Loop', 'Creole Nature Trail'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Touring'] },
+  'huntsville-al':     { name: 'Huntsville, AL', region: 'south', roads: ['Natchez Trace', 'Cherohala Skyway', 'Tail of the Dragon'], defaultBrands: ['HARLEY-DAVIDSON','BMW'], types: ['Cruiser','Touring'] },
+  'charleston-sc':     { name: 'Charleston, SC', region: 'south', roads: ['Blue Ridge Parkway upstate', 'SC-11 Cherokee Foothills', 'Savannah Highway'], defaultBrands: ['HARLEY-DAVIDSON','INDIAN','HONDA'], types: ['Cruiser','Touring'] },
+  'columbia-sc':       { name: 'Columbia, SC', region: 'south', roads: ['SC-11 Cherokee Foothills', 'Blue Ridge Parkway', 'Sassafras Mountain'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Standard'] },
+  'myrtle-beach-sc':   { name: 'Myrtle Beach, SC', region: 'south', roads: ['US-17 Coastal', 'SC-11 Cherokee Foothills', 'NC Outer Banks'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Touring'] },
+  'little-rock-ar':    { name: 'Little Rock, AR', region: 'south', roads: ['AR-7 Scenic Byway', 'Pig Trail Scenic Byway', 'Talimena Drive'], defaultBrands: ['HARLEY-DAVIDSON','BMW'], types: ['Adventure','Cruiser'] },
+  'tulsa-ok':          { name: 'Tulsa, OK', region: 'south', roads: ['Talimena Scenic Drive', 'Route 66', 'AR Pig Trail'], defaultBrands: ['HARLEY-DAVIDSON','INDIAN'], types: ['Cruiser','Touring'] },
+  'wichita-ks':        { name: 'Wichita, KS', region: 'south', roads: ['Flint Hills Scenic Byway', 'Route 66', 'KS-177'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Touring'] },
+  'baton-rouge-la':    { name: 'Baton Rouge, LA', region: 'south', roads: ['River Road', 'Natchez Trace', 'Creole Nature Trail'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Touring'] },
+  'shreveport-la':     { name: 'Shreveport, LA', region: 'south', roads: ['Talimena Drive', 'Natchez Trace', 'AR-7'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Touring'] },
+  'jackson-ms':        { name: 'Jackson, MS', region: 'south', roads: ['Natchez Trace Parkway', 'MS Delta Loop', 'MS-15'], defaultBrands: ['HARLEY-DAVIDSON','INDIAN'], types: ['Cruiser','Touring'] },
+  // NORTHEAST / MID-ATLANTIC
+  'new-york-ny':       { name: 'New York, NY', region: 'northeast', roads: ["Bear Mountain Loop", "Storm King Highway", "Hawk's Nest US-97"], defaultBrands: ['HARLEY-DAVIDSON','BMW','TRIUMPH','INDIAN'], types: ['Cruiser','Standard','Touring'] },
+  'philadelphia-pa':   { name: 'Philadelphia, PA', region: 'northeast', roads: ['PA Route 32 River Road', "Hawk's Nest", 'PA-339'], defaultBrands: ['HARLEY-DAVIDSON','BMW','TRIUMPH'], types: ['Cruiser','Standard','Touring'] },
+  'boston-ma':         { name: 'Boston, MA', region: 'northeast', roads: ['Kancamagus Highway', 'Mohawk Trail', 'VT-100'], defaultBrands: ['HARLEY-DAVIDSON','BMW','TRIUMPH'], types: ['Touring','Cruiser','Standard'] },
+  'washington-dc':     { name: 'Washington, DC', region: 'northeast', roads: ['Blue Ridge Parkway', 'Skyline Drive', 'Chesapeake Bay Loop'], defaultBrands: ['HARLEY-DAVIDSON','BMW','INDIAN'], types: ['Cruiser','Touring'] },
+  'baltimore-md':      { name: 'Baltimore, MD', region: 'northeast', roads: ['Skyline Drive', 'MD-77', 'Chesapeake Bay Loop'], defaultBrands: ['HARLEY-DAVIDSON','BMW','HONDA'], types: ['Cruiser','Touring'] },
+  'newark-nj':         { name: 'Newark, NJ', region: 'northeast', roads: ["Hawk's Nest", 'Bear Mountain Loop', 'NJ-519 Delaware Water Gap'], defaultBrands: ['HARLEY-DAVIDSON','BMW'], types: ['Cruiser','Standard'] },
+  'jersey-city-nj':    { name: 'Jersey City, NJ', region: 'northeast', roads: ["Hawk's Nest", 'Bear Mountain', 'Storm King Highway'], defaultBrands: ['HARLEY-DAVIDSON','BMW'], types: ['Cruiser','Standard'] },
+  'pittsburgh-pa':     { name: 'Pittsburgh, PA', region: 'northeast', roads: ['PA-381 Ohiopyle', 'PA-653', 'Laurel Highlands Loop'], defaultBrands: ['HARLEY-DAVIDSON','BMW','HONDA'], types: ['Cruiser','Adventure','Touring'] },
+  'buffalo-ny':        { name: 'Buffalo, NY', region: 'northeast', roads: ['Letchworth State Park Loop', 'Finger Lakes', 'Adirondack Loop'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Touring'] },
+  'rochester-ny':      { name: 'Rochester, NY', region: 'northeast', roads: ['Finger Lakes Loop', 'Letchworth', 'Adirondack Scenic'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Touring'] },
+  'syracuse-ny':       { name: 'Syracuse, NY', region: 'northeast', roads: ['Adirondack Loop', 'Finger Lakes', 'Catskill Loop'], defaultBrands: ['HARLEY-DAVIDSON','BMW'], types: ['Cruiser','Touring'] },
+  'hartford-ct':       { name: 'Hartford, CT', region: 'northeast', roads: ['Litchfield Hills', 'Mohawk Trail', 'VT-100'], defaultBrands: ['HARLEY-DAVIDSON','BMW','TRIUMPH'], types: ['Touring','Standard'] },
+  'providence-ri':     { name: 'Providence, RI', region: 'northeast', roads: ['Kancamagus Highway', 'Mohawk Trail', 'CT-169'], defaultBrands: ['HARLEY-DAVIDSON','TRIUMPH','BMW'], types: ['Touring','Standard'] },
+  'albany-ny':         { name: 'Albany, NY', region: 'northeast', roads: ['Adirondack Loop', 'Catskill Loop', 'Mohawk Trail'], defaultBrands: ['HARLEY-DAVIDSON','BMW'], types: ['Cruiser','Touring'] },
+  'bridgeport-ct':     { name: 'Bridgeport, CT', region: 'northeast', roads: ['Merritt Parkway', 'Litchfield Hills', 'Bear Mountain'], defaultBrands: ['HARLEY-DAVIDSON','BMW','TRIUMPH'], types: ['Standard','Cruiser'] },
+  'new-haven-ct':      { name: 'New Haven, CT', region: 'northeast', roads: ['Litchfield Hills', 'CT-169', 'Mohawk Trail'], defaultBrands: ['HARLEY-DAVIDSON','BMW'], types: ['Standard','Cruiser'] },
+  'wilmington-de':     { name: 'Wilmington, DE', region: 'northeast', roads: ['PA Route 32', 'Skyline Drive', 'MD Eastern Shore'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Touring'] },
+  'portland-me':       { name: 'Portland, ME', region: 'northeast', roads: ['Acadia National Park Loop', 'US-1 Coastal', 'Kancamagus Highway'], defaultBrands: ['HARLEY-DAVIDSON','BMW'], types: ['Touring','Adventure'] },
+  'manchester-nh':     { name: 'Manchester, NH', region: 'northeast', roads: ['Kancamagus Highway', 'Mt Washington Auto Road', 'VT-100'], defaultBrands: ['HARLEY-DAVIDSON','BMW','TRIUMPH'], types: ['Touring','Standard'] },
+  'burlington-vt':     { name: 'Burlington, VT', region: 'northeast', roads: ['VT-100', 'Smugglers Notch', 'Green Mountain Byway'], defaultBrands: ['HARLEY-DAVIDSON','BMW','TRIUMPH'], types: ['Touring','Standard','Adventure'] },
+  // MIDWEST
+  'chicago-il':        { name: 'Chicago, IL', region: 'midwest', roads: ['Great River Road', 'WI-35', 'Kettle Moraine Scenic Drive'], defaultBrands: ['HARLEY-DAVIDSON','INDIAN','HONDA'], types: ['Touring','Cruiser'] },
+  'indianapolis-in':   { name: 'Indianapolis, IN', region: 'midwest', roads: ['Brown County Loop', 'OH River Scenic', 'IN-46'], defaultBrands: ['HARLEY-DAVIDSON','INDIAN','HONDA'], types: ['Cruiser','Touring'] },
+  'columbus-oh':       { name: 'Columbus, OH', region: 'midwest', roads: ['OH-78 Hocking Hills', 'OH-800 Appalachian', 'Windy 9'], defaultBrands: ['HONDA','HARLEY-DAVIDSON','BMW'], types: ['Standard','Cruiser','Adventure'] },
+  'detroit-mi':        { name: 'Detroit, MI', region: 'midwest', roads: ['M-119 Tunnel of Trees', 'US-2 Upper Peninsula', 'M-22'], defaultBrands: ['HARLEY-DAVIDSON','HONDA','BMW'], types: ['Cruiser','Touring','Adventure'] },
+  'milwaukee-wi':      { name: 'Milwaukee, WI', region: 'midwest', roads: ['Kettle Moraine Scenic Drive', 'WI-35 Great River Road', 'Door County Loop'], defaultBrands: ['HARLEY-DAVIDSON','INDIAN','HONDA'], types: ['Cruiser','Touring'] },
+  'minneapolis-mn':    { name: 'Minneapolis, MN', region: 'midwest', roads: ['North Shore Scenic Drive MN-61', 'Great River Road', 'WI-35'], defaultBrands: ['HARLEY-DAVIDSON','HONDA','BMW'], types: ['Touring','Cruiser','Adventure'] },
+  'kansas-city-mo':    { name: 'Kansas City, MO', region: 'midwest', roads: ['MO-79 Bluffs', 'Lake of the Ozarks Loop', 'Route 66'], defaultBrands: ['HARLEY-DAVIDSON','INDIAN','HONDA'], types: ['Cruiser','Touring'] },
+  'omaha-ne':          { name: 'Omaha, NE', region: 'midwest', roads: ['Loess Hills Scenic Byway', 'NE-2', 'Great River Road'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Touring'] },
+  'cleveland-oh':      { name: 'Cleveland, OH', region: 'midwest', roads: ['OH-800', 'Windy 9', 'Hocking Hills Loop'], defaultBrands: ['HONDA','HARLEY-DAVIDSON'], types: ['Standard','Cruiser'] },
+  'cincinnati-oh':     { name: 'Cincinnati, OH', region: 'midwest', roads: ['OH-800 Appalachian', 'Red River Gorge KY', 'AA Highway'], defaultBrands: ['HARLEY-DAVIDSON','BMW','HONDA'], types: ['Cruiser','Touring','Adventure'] },
+  'st-louis-mo':       { name: 'St. Louis, MO', region: 'midwest', roads: ['Route 66', 'MO-79 River Road', 'Lake of the Ozarks'], defaultBrands: ['HARLEY-DAVIDSON','INDIAN','HONDA'], types: ['Cruiser','Touring'] },
+  'madison-wi':        { name: 'Madison, WI', region: 'midwest', roads: ["WI-35", "Kettle Moraine", "Devil's Lake Loop"], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Standard'] },
+  'fort-wayne-in':     { name: 'Fort Wayne, IN', region: 'midwest', roads: ['Brown County Loop', 'OH-78', 'MI Tunnel of Trees'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Touring'] },
+  'toledo-oh':         { name: 'Toledo, OH', region: 'midwest', roads: ['OH-800', 'M-119 Tunnel of Trees MI', 'Hocking Hills'], defaultBrands: ['HONDA','HARLEY-DAVIDSON'], types: ['Standard','Cruiser'] },
+  'st-paul-mn':        { name: 'St. Paul, MN', region: 'midwest', roads: ['North Shore Scenic Drive', 'WI-35', 'Great River Road'], defaultBrands: ['HARLEY-DAVIDSON','HONDA','BMW'], types: ['Touring','Cruiser'] },
+  'lincoln-ne':        { name: 'Lincoln, NE', region: 'midwest', roads: ['NE-2 Sandhills', 'Loess Hills', 'Great River Road'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Touring'] },
+  'grand-rapids-mi':   { name: 'Grand Rapids, MI', region: 'midwest', roads: ['M-119 Tunnel of Trees', 'M-22', 'US-2 Upper Peninsula'], defaultBrands: ['HARLEY-DAVIDSON','HONDA','BMW'], types: ['Cruiser','Touring','Adventure'] },
+  'des-moines-ia':     { name: 'Des Moines, IA', region: 'midwest', roads: ['Great River Road', 'Loess Hills', 'IA-76'], defaultBrands: ['HARLEY-DAVIDSON','HONDA'], types: ['Cruiser','Touring'] },
+  'dayton-oh':         { name: 'Dayton, OH', region: 'midwest', roads: ['OH-78 Hocking Hills', 'Windy 9', 'Red River Gorge'], defaultBrands: ['HONDA','HARLEY-DAVIDSON'], types: ['Standard','Cruiser'] },
+  'sioux-falls-sd':    { name: 'Sioux Falls, SD', region: 'midwest', roads: ['Needles Highway', 'Spearfish Canyon', 'Iron Mountain Road'], defaultBrands: ['HARLEY-DAVIDSON','INDIAN'], types: ['Cruiser','Touring'] }
+};
+
+// City tag arrays - drives tag-based scoring
+const CITY_TAGS = {
+  'los-angeles-ca':    ['coastal','twisty','touring','food_culture','nightlife','urban_gateway','year_round','weekend','cruiser','sport','adventure'],
+  'san-francisco-ca':  ['coastal','scenic_byway','touring','food_culture','nightlife','urban_gateway','year_round','weekend','week_plus','cruiser','adventure'],
+  'san-diego-ca':      ['coastal','mountain','cruising','beach','food_culture','year_round','weekend','beginner_friendly','cruiser','standard'],
+  'san-jose-ca':       ['mountain','twisty','sport','urban_gateway','year_round','weekend','intermediate','standard'],
+  'seattle-wa':        ['mountain','forest','coastal','scenic_byway','nature','adventure_gravel','spring_fall_best','summer_peak','week_plus','adventure','touring'],
+  'portland-or':       ['mountain','forest','river','scenic_byway','nature','food_culture','spring_fall_best','summer_peak','week_plus','adventure','touring'],
+  'sacramento-ca':     ['mountain','scenic_byway','nature','history_culture','year_round','weekend','week_plus','cruiser','adventure','touring'],
+  'long-beach-ca':     ['coastal','beach','cruising','urban_gateway','year_round','weekend','beginner_friendly','cruiser','standard','food_culture'],
+  'oakland-ca':        ['mountain','twisty','coastal','urban_gateway','year_round','weekend','sport','standard'],
+  'fresno-ca':         ['mountain','canyon','nature','adventure_gravel','summer_peak','spring_fall_best','week_plus','adventure','touring'],
+  'bakersfield-ca':    ['mountain','canyon','desert','plains','cruising','year_round','weekend','beginner_friendly','cruiser','standard'],
+  'anaheim-ca':        ['coastal','mountain','cruising','urban_gateway','year_round','weekend','beginner_friendly','cruiser','standard'],
+  'santa-ana-ca':      ['coastal','beach','cruising','urban_gateway','year_round','weekend','beginner_friendly','standard','cruiser','food_culture'],
+  'irvine-ca':         ['coastal','mountain','twisty','technical','urban_gateway','year_round','weekend','sport','standard','advanced'],
+  'riverside-ca':      ['mountain','twisty','desert','urban_gateway','year_round','weekend','sport','cruiser'],
+  'stockton-ca':       ['mountain','scenic_byway','adventure_gravel','advanced','technical','summer_peak','spring_fall_best','week_plus','adventure','touring'],
+  'chula-vista-ca':    ['coastal','beach','island','cruising','year_round','weekend','beginner_friendly','cruiser','standard'],
+  'fremont-ca':        ['mountain','twisty','technical','urban_gateway','year_round','weekend','sport','standard','advanced'],
+  'modesto-ca':        ['mountain','scenic_byway','nature','year_round','weekend','cruiser','touring'],
+  'tacoma-wa':         ['mountain','forest','coastal','scenic_byway','nature','adventure_gravel','summer_peak','week_plus','adventure','touring'],
+  'spokane-wa':        ['mountain','forest','lake','adventure_gravel','summer_peak','weekend','adventure','cruiser'],
+  'eugene-or':         ['mountain','forest','coastal','scenic_byway','nature','summer_peak','spring_fall_best','week_plus','adventure','touring'],
+  'salem-or':          ['mountain','forest','coastal','scenic_byway','nature','summer_peak','spring_fall_best','week_plus','touring','adventure'],
+  'boise-id':          ['mountain','adventure_gravel','scenic_byway','nature','summer_peak','week_plus','advanced','adventure','touring'],
+  'anchorage-ak':      ['mountain','adventure_gravel','scenic_byway','nature','summer_peak','week_plus','advanced','adventure'],
+  'honolulu-hi':       ['coastal','island','beach','scenic_byway','nature','year_round','week_plus','beginner_friendly','cruiser','standard'],
+  'phoenix-az':        ['desert','mountain','canyon','scenic_byway','winter_friendly','year_round','weekend','week_plus','adventure','cruiser','touring'],
+  'denver-co':         ['mountain','twisty','scenic_byway','nature','summer_peak','weekend','week_plus','intermediate','adventure','touring','cruiser'],
+  'las-vegas-nv':      ['desert','canyon','nightlife','food_culture','urban_gateway','winter_friendly','year_round','weekend','week_plus','cruiser','adventure','touring'],
+  'colorado-springs-co':['mountain','twisty','technical','scenic_byway','nature','summer_peak','weekend','advanced','adventure','cruiser'],
+  'tucson-az':         ['desert','mountain','canyon','scenic_byway','nature','winter_friendly','year_round','weekend','adventure','cruiser'],
+  'mesa-az':           ['desert','canyon','scenic_byway','winter_friendly','year_round','weekend','beginner_friendly','cruiser','adventure'],
+  'albuquerque-nm':    ['mountain','desert','scenic_byway','history_culture','roadside_americana','year_round','weekend','week_plus','adventure','touring','cruiser'],
+  'aurora-co':         ['mountain','twisty','scenic_byway','nature','lake','summer_peak','weekend','adventure','cruiser','beginner_friendly'],
+  'henderson-nv':      ['desert','canyon','nightlife','winter_friendly','year_round','weekend','beginner_friendly','cruiser','standard'],
+  'chandler-az':       ['desert','canyon','food_culture','winter_friendly','year_round','weekend','beginner_friendly','cruiser','adventure'],
+  'scottsdale-az':     ['desert','mountain','canyon','scenic_byway','food_culture','nightlife','winter_friendly','year_round','weekend','cruiser','touring','adventure'],
+  'gilbert-az':        ['desert','canyon','food_culture','history_culture','winter_friendly','year_round','weekend','beginner_friendly','cruiser','standard'],
+  'glendale-az':       ['desert','mountain','scenic_byway','food_culture','winter_friendly','year_round','weekend','cruiser','touring'],
+  'reno-nv':           ['mountain','lake','scenic_byway','nightlife','history_culture','year_round','weekend','week_plus','cruiser','touring','adventure'],
+  'north-las-vegas-nv':['desert','canyon','nightlife','roadside_americana','adventure_gravel','winter_friendly','year_round','weekend','cruiser','standard'],
+  'salt-lake-city-ut': ['mountain','adventure_gravel','scenic_byway','nature','summer_peak','week_plus','adventure','touring','cruiser'],
+  'provo-ut':          ['mountain','twisty','scenic_byway','nature','summer_peak','weekend','adventure','touring'],
+  'billings-mt':       ['mountain','adventure_gravel','scenic_byway','nature','summer_peak','week_plus','advanced','adventure','touring'],
+  'missoula-mt':       ['mountain','forest','adventure_gravel','scenic_byway','nature','summer_peak','week_plus','advanced','adventure','touring'],
+  'santa-fe-nm':       ['mountain','desert','scenic_byway','history_culture','food_culture','year_round','week_plus','touring','cruiser','adventure'],
+  'flagstaff-az':      ['mountain','canyon','scenic_byway','history_culture','roadside_americana','year_round','weekend','week_plus','adventure','touring'],
+  'rapid-city-sd':     ['mountain','twisty','technical','scenic_byway','nature','history_culture','spring_fall_best','summer_peak','week_plus','cruiser','touring'],
+  'durango-co':        ['mountain','twisty','technical','scenic_byway','nature','summer_peak','week_plus','advanced','adventure','touring'],
+  'houston-tx':        ['plains','river','cruising','food_culture','urban_gateway','year_round','weekend','beginner_friendly','cruiser','touring'],
+  'san-antonio-tx':    ['mountain','twisty','scenic_byway','history_culture','food_culture','year_round','weekend','week_plus','cruiser','touring'],
+  'dallas-tx':         ['plains','mountain','cruising','urban_gateway','roadside_americana','lake','food_culture','year_round','weekend','cruiser','touring','standard'],
+  'austin-tx':         ['mountain','twisty','scenic_byway','food_culture','nightlife','year_round','weekend','week_plus','cruiser','standard','adventure'],
+  'jacksonville-fl':   ['coastal','beach','scenic_byway','nature','year_round','weekend','beginner_friendly','cruiser','touring'],
+  'charlotte-nc':      ['mountain','twisty','technical','scenic_byway','nature','spring_fall_best','summer_peak','weekend','week_plus','cruiser','touring','sport'],
+  'fort-worth-tx':     ['plains','mountain','cruising','history_culture','roadside_americana','year_round','weekend','cruiser','touring'],
+  'nashville-tn':      ['mountain','scenic_byway','food_culture','nightlife','history_culture','roadside_americana','spring_fall_best','year_round','week_plus','cruiser','touring','standard'],
+  'el-paso-tx':        ['desert','mountain','scenic_byway','history_culture','roadside_americana','year_round','weekend','cruiser','adventure'],
+  'memphis-tn':        ['plains','river','scenic_byway','history_culture','food_culture','roadside_americana','spring_fall_best','year_round','weekend','week_plus','cruiser','touring'],
+  'louisville-ky':     ['mountain','forest','scenic_byway','nature','food_culture','history_culture','spring_fall_best','summer_peak','weekend','week_plus','cruiser','touring','adventure'],
+  'oklahoma-city-ok':  ['plains','mountain','scenic_byway','history_culture','roadside_americana','year_round','weekend','cruiser','touring'],
+  'atlanta-ga':        ['mountain','twisty','technical','scenic_byway','nature','food_culture','spring_fall_best','summer_peak','week_plus','cruiser','sport','adventure'],
+  'miami-fl':          ['coastal','beach','nightlife','food_culture','urban_gateway','year_round','weekend','week_plus','cruiser','touring','standard'],
+  'tampa-fl':          ['coastal','beach','island','cruising','nature','year_round','weekend','beginner_friendly','cruiser','standard'],
+  'orlando-fl':        ['coastal','beach','scenic_byway','roadside_americana','year_round','weekend','beginner_friendly','cruiser','touring'],
+  'new-orleans-la':    ['river','coastal','food_culture','nightlife','history_culture','roadside_americana','year_round','weekend','week_plus','cruiser','touring'],
+  'raleigh-nc':        ['mountain','forest','scenic_byway','nature','food_culture','spring_fall_best','summer_peak','weekend','week_plus','touring','cruiser'],
+  'virginia-beach-va': ['coastal','beach','mountain','scenic_byway','history_culture','spring_fall_best','year_round','weekend','cruiser','touring'],
+  'norfolk-va':        ['coastal','beach','mountain','scenic_byway','history_culture','year_round','weekend','cruiser','touring'],
+  'richmond-va':       ['mountain','scenic_byway','history_culture','nature','spring_fall_best','year_round','weekend','cruiser','touring'],
+  'chesapeake-va':     ['coastal','mountain','forest','lake','scenic_byway','nature','spring_fall_best','year_round','weekend','cruiser','touring'],
+  'durham-nc':         ['mountain','forest','scenic_byway','nature','food_culture','spring_fall_best','summer_peak','weekend','touring','cruiser'],
+  'greensboro-nc':     ['mountain','twisty','technical','scenic_byway','nature','spring_fall_best','summer_peak','weekend','cruiser','touring'],
+  'winston-salem-nc':  ['mountain','twisty','scenic_byway','history_culture','roadside_americana','spring_fall_best','summer_peak','weekend','cruiser','touring'],
+  'st-petersburg-fl':  ['coastal','beach','cruising','year_round','weekend','beginner_friendly','cruiser','standard'],
+  'corpus-christi-tx': ['coastal','beach','island','cruising','year_round','weekend','beginner_friendly','cruiser','standard'],
+  'lexington-ky':      ['mountain','forest','scenic_byway','history_culture','food_culture','spring_fall_best','summer_peak','weekend','week_plus','cruiser','touring'],
+  'knoxville-tn':      ['mountain','twisty','technical','scenic_byway','nature','spring_fall_best','summer_peak','week_plus','advanced','sport','cruiser','touring'],
+  'chattanooga-tn':    ['mountain','twisty','technical','scenic_byway','nature','spring_fall_best','summer_peak','week_plus','intermediate','sport','cruiser'],
+  'savannah-ga':       ['coastal','mountain','scenic_byway','history_culture','food_culture','year_round','weekend','beginner_friendly','cruiser','standard'],
+  'birmingham-al':     ['mountain','scenic_byway','history_culture','nature','spring_fall_best','year_round','weekend','cruiser','touring'],
+  'mobile-al':         ['coastal','mountain','scenic_byway','nature','history_culture','year_round','weekend','cruiser','touring'],
+  'huntsville-al':     ['mountain','twisty','scenic_byway','history_culture','spring_fall_best','summer_peak','weekend','week_plus','cruiser','touring'],
+  'charleston-sc':     ['coastal','mountain','scenic_byway','history_culture','food_culture','year_round','weekend','week_plus','beginner_friendly','cruiser','touring'],
+  'columbia-sc':       ['mountain','lake','scenic_byway','nature','adventure_gravel','spring_fall_best','year_round','weekend','cruiser','standard'],
+  'myrtle-beach-sc':   ['coastal','beach','island','scenic_byway','food_culture','year_round','weekend','beginner_friendly','cruiser','touring'],
+  'little-rock-ar':    ['mountain','forest','scenic_byway','adventure_gravel','nature','spring_fall_best','year_round','weekend','adventure','cruiser'],
+  'tulsa-ok':          ['plains','mountain','scenic_byway','history_culture','roadside_americana','food_culture','year_round','weekend','cruiser','touring'],
+  'wichita-ks':        ['plains','scenic_byway','history_culture','roadside_americana','year_round','weekend','beginner_friendly','cruiser','touring'],
+  'baton-rouge-la':    ['river','coastal','scenic_byway','history_culture','food_culture','year_round','weekend','beginner_friendly','cruiser','touring'],
+  'shreveport-la':     ['mountain','forest','scenic_byway','adventure_gravel','nature','year_round','weekend','cruiser','touring'],
+  'jackson-ms':        ['plains','river','scenic_byway','history_culture','roadside_americana','beginner_friendly','year_round','weekend','cruiser','touring'],
+  'new-york-ny':       ['mountain','twisty','scenic_byway','urban_gateway','history_culture','food_culture','spring_fall_best','year_round','weekend','week_plus','cruiser','standard','touring'],
+  'philadelphia-pa':   ['mountain','river','scenic_byway','history_culture','food_culture','spring_fall_best','year_round','weekend','cruiser','standard','touring'],
+  'boston-ma':         ['mountain','forest','scenic_byway','history_culture','food_culture','spring_fall_best','summer_peak','week_plus','touring','cruiser','standard'],
+  'washington-dc':     ['mountain','scenic_byway','history_culture','food_culture','nature','spring_fall_best','year_round','weekend','week_plus','cruiser','touring'],
+  'baltimore-md':      ['mountain','coastal','scenic_byway','history_culture','nature','spring_fall_best','year_round','weekend','cruiser','touring'],
+  'newark-nj':         ['mountain','twisty','urban_gateway','food_culture','spring_fall_best','year_round','weekend','cruiser','standard'],
+  'jersey-city-nj':    ['mountain','twisty','coastal','urban_gateway','spring_fall_best','year_round','weekend','cruiser','standard'],
+  'pittsburgh-pa':     ['mountain','forest','river','scenic_byway','nature','history_culture','spring_fall_best','summer_peak','week_plus','cruiser','adventure','touring'],
+  'buffalo-ny':        ['mountain','lake','forest','scenic_byway','nature','summer_peak','spring_fall_best','week_plus','cruiser','touring'],
+  'rochester-ny':      ['mountain','lake','food_culture','scenic_byway','nature','spring_fall_best','summer_peak','week_plus','cruiser','touring'],
+  'syracuse-ny':       ['mountain','lake','forest','adventure_gravel','scenic_byway','nature','spring_fall_best','summer_peak','week_plus','cruiser','touring'],
+  'hartford-ct':       ['mountain','forest','scenic_byway','history_culture','food_culture','roadside_americana','spring_fall_best','summer_peak','weekend','standard','touring'],
+  'providence-ri':     ['mountain','coastal','scenic_byway','history_culture','food_culture','spring_fall_best','summer_peak','weekend','touring','standard'],
+  'albany-ny':         ['mountain','forest','scenic_byway','history_culture','nature','spring_fall_best','summer_peak','weekend','week_plus','cruiser','touring'],
+  'bridgeport-ct':     ['coastal','mountain','scenic_byway','history_culture','food_culture','spring_fall_best','year_round','weekend','standard','cruiser'],
+  'new-haven-ct':      ['coastal','mountain','forest','scenic_byway','food_culture','history_culture','spring_fall_best','summer_peak','weekend','standard','cruiser'],
+  'wilmington-de':     ['coastal','mountain','river','scenic_byway','history_culture','spring_fall_best','year_round','weekend','cruiser','touring'],
+  'portland-me':       ['coastal','mountain','forest','scenic_byway','nature','food_culture','summer_peak','spring_fall_best','week_plus','touring','adventure'],
+  'manchester-nh':     ['mountain','forest','twisty','scenic_byway','nature','summer_peak','spring_fall_best','week_plus','touring','standard'],
+  'burlington-vt':     ['mountain','forest','twisty','scenic_byway','nature','food_culture','summer_peak','spring_fall_best','week_plus','touring','standard','adventure'],
+  'chicago-il':        ['lake','plains','river','food_culture','nightlife','urban_gateway','spring_fall_best','year_round','week_plus','touring','cruiser'],
+  'indianapolis-in':   ['plains','forest','river','scenic_byway','history_culture','spring_fall_best','year_round','weekend','cruiser','touring'],
+  'columbus-oh':       ['forest','mountain','scenic_byway','nature','adventure_gravel','spring_fall_best','year_round','weekend','week_plus','standard','cruiser','adventure'],
+  'detroit-mi':        ['lake','forest','mountain','scenic_byway','nature','history_culture','summer_peak','spring_fall_best','week_plus','cruiser','touring','adventure'],
+  'milwaukee-wi':      ['lake','plains','scenic_byway','food_culture','history_culture','spring_fall_best','summer_peak','week_plus','cruiser','touring'],
+  'minneapolis-mn':    ['lake','forest','river','scenic_byway','nature','food_culture','spring_fall_best','summer_peak','week_plus','touring','cruiser','adventure'],
+  'kansas-city-mo':    ['plains','river','scenic_byway','history_culture','roadside_americana','food_culture','year_round','weekend','week_plus','cruiser','touring'],
+  'omaha-ne':          ['plains','river','scenic_byway','nature','history_culture','year_round','weekend','beginner_friendly','cruiser','touring'],
+  'cleveland-oh':      ['lake','forest','food_culture','scenic_byway','nature','history_culture','spring_fall_best','year_round','weekend','standard','cruiser'],
+  'cincinnati-oh':     ['mountain','forest','river','scenic_byway','nature','adventure_gravel','spring_fall_best','year_round','weekend','week_plus','cruiser','touring','adventure'],
+  'st-louis-mo':       ['river','plains','scenic_byway','history_culture','roadside_americana','food_culture','year_round','weekend','week_plus','cruiser','touring'],
+  'madison-wi':        ['lake','plains','forest','scenic_byway','nature','food_culture','spring_fall_best','summer_peak','weekend','cruiser','standard'],
+  'fort-wayne-in':     ['plains','lake','forest','scenic_byway','history_culture','spring_fall_best','year_round','weekend','cruiser','touring'],
+  'toledo-oh':         ['lake','plains','forest','scenic_byway','nature','food_culture','spring_fall_best','year_round','weekend','standard','cruiser'],
+  'st-paul-mn':        ['lake','river','forest','scenic_byway','nature','food_culture','spring_fall_best','summer_peak','week_plus','touring','cruiser'],
+  'lincoln-ne':        ['plains','river','scenic_byway','nature','history_culture','roadside_americana','year_round','weekend','beginner_friendly','cruiser','touring'],
+  'grand-rapids-mi':   ['lake','forest','mountain','scenic_byway','nature','summer_peak','spring_fall_best','week_plus','cruiser','touring','adventure'],
+  'des-moines-ia':     ['plains','river','scenic_byway','nature','food_culture','spring_fall_best','year_round','weekend','beginner_friendly','cruiser','touring'],
+  'dayton-oh':         ['forest','mountain','scenic_byway','nature','adventure_gravel','spring_fall_best','year_round','weekend','standard','cruiser'],
+  'sioux-falls-sd':    ['plains','mountain','twisty','technical','scenic_byway','nature','history_culture','roadside_americana','spring_fall_best','summer_peak','week_plus','cruiser','touring']
+};
+
+const QUIZ_QUESTIONS = [
+  {
+    id: 'q1',
+    text: "What's drawing you to this trip?",
+    sub: "Tell us your primary motivation for hitting the road.",
+    key: 'motivation',
+    options: [
+      { id: 'scenic_cruise', icon: '🌅', title: 'Relaxing scenic cruise', desc: 'Stops along the way, no rush, soaking it in' },
+      { id: 'mountain_twisty', icon: '⛰', title: 'Twisty mountain roads', desc: 'Canyon carving and leaning into corners' },
+      { id: 'adventure_gravel', icon: '🏕', title: 'Off the beaten path', desc: 'Gravel, adventure riding, backcountry exploration' },
+      { id: 'cross_country', icon: '🛣', title: 'Epic cross-country trip', desc: 'Serious miles, long days, destination riding' },
+      { id: 'weekend_escape', icon: '🏙', title: 'Weekend escape from the city', desc: 'Quick getaway, 200-400 miles round trip' }
+    ]
+  },
+  {
+    id: 'q2',
+    text: "How many days are you riding?",
+    sub: "This helps us match routes to your available time.",
+    key: 'duration',
+    options: [
+      { id: 'day', icon: '☀️', title: 'Day trip', desc: 'One perfect riding day' },
+      { id: 'weekend', icon: '📅', title: 'Long weekend', desc: '2-3 days, Friday to Sunday' },
+      { id: 'week', icon: '🗓', title: 'Full week', desc: '5-7 days, real adventure territory' },
+      { id: 'epic', icon: '🌍', title: 'Epic adventure', desc: '7+ days, cross-country or bucket list' }
+    ]
+  },
+  {
+    id: 'q3',
+    text: "What time of year are you planning?",
+    sub: "Season affects which routes are open and rideable.",
+    key: 'season',
+    options: [
+      { id: 'spring', icon: '🌸', title: 'Spring', desc: 'March through May' },
+      { id: 'summer', icon: '☀️', title: 'Summer', desc: 'June through August' },
+      { id: 'fall', icon: '🍂', title: 'Fall', desc: 'September through November' },
+      { id: 'winter', icon: '❄️', title: 'Winter', desc: 'December through February' }
+    ]
+  },
+  {
+    id: 'q4',
+    text: "How would you describe your riding experience?",
+    sub: "Be honest here - it helps us match the right routes and bikes.",
+    key: 'experience',
+    options: [
+      { id: 'beginner', icon: '🟢', title: 'New rider', desc: 'Under 1 year, still building confidence' },
+      { id: 'intermediate', icon: '🟡', title: 'Intermediate', desc: '1-5 years, comfortable on most roads' },
+      { id: 'experienced', icon: '🔴', title: 'Experienced', desc: '5+ years, ready for anything' }
+    ]
+  },
+  {
+    id: 'q5',
+    text: "Solo or riding with others?",
+    sub: "Passenger and group riding changes the ideal bike type.",
+    key: 'group',
+    options: [
+      { id: 'solo', icon: '🏍', title: 'Solo', desc: 'Just me and the road' },
+      { id: 'passenger', icon: '👫', title: 'With a passenger', desc: 'Two-up riding, need comfortable seating' },
+      { id: 'group', icon: '🏍🏍', title: 'Group ride', desc: 'Pack of friends, popular well-known routes' }
+    ]
+  },
+  {
+    id: 'q6',
+    text: "Are you open to traveling to your destination?",
+    sub: "Say yes and we'll match you anywhere in the USA. Say no and we'll keep things close to home.",
+    key: 'travel_open',
+    options: [
+      { id: 'yes', icon: '✈️', title: 'Yes, anywhere in the USA', desc: 'I can fly in or drive to the right destination' },
+      { id: 'no',  icon: '📍', title: 'No, keep it close to home', desc: 'I want routes I can reach from where I live' }
+    ]
+  },
+  {
+    id: 'q6b',
+    text: "Where in the USA are you located?",
+    sub: "We'll suggest destinations within a reasonable distance.",
+    key: 'home_region',
+    conditional: (ans) => ans.travel_open === 'no',
+    options: [
+      { id: 'west',      icon: '🌊', title: 'West Coast',             desc: 'CA, OR, WA, HI, AK' },
+      { id: 'mountain',  icon: '⛰',  title: 'Mountain West',          desc: 'CO, AZ, NV, UT, MT, ID, WY, NM, SD' },
+      { id: 'south',     icon: '🌴', title: 'South / Southeast',       desc: 'TX, FL, TN, NC, GA, VA and more' },
+      { id: 'northeast', icon: '🗽', title: 'Northeast / Mid-Atlantic', desc: 'NY, PA, MA, CT, VT, NH, ME, NJ and more' },
+      { id: 'midwest',   icon: '🌽', title: 'Midwest',                 desc: 'OH, MI, IL, IN, WI, MN, MO and more' }
+    ]
+  },
+  {
+    id: 'q7',
+    text: "What matters most at your stops?",
+    sub: "This fine-tunes your destination match.",
+    key: 'vibe',
+    options: [
+      { id: 'nature',          icon: '🏞', title: 'Natural beauty and scenery',      desc: 'Overlooks, national parks, wilderness' },
+      { id: 'food_culture',    icon: '🍴', title: 'Great food and local culture',    desc: 'Restaurants, towns, local character' },
+      { id: 'technical',       icon: '🏁', title: 'Challenging, technical riding',   desc: 'Dragon-style curves, switchbacks, focus' },
+      { id: 'history_culture', icon: '🗿', title: 'History and roadside attractions', desc: 'Route 66, heritage, roadside Americana' },
+      { id: 'nightlife',       icon: '🎶', title: 'Nightlife and entertainment',     desc: 'Urban hubs like Vegas, Miami, Nashville' }
+    ]
+  },
+  {
+    id: 'q8',
+    text: "Will you need to rent a motorcycle?",
+    sub: "This helps us tailor the final recommendation.",
+    key: 'needs_bike',
+    options: [
+      { id: 'yes',    icon: '🔑', title: 'Yes, I need to rent',  desc: "I don't own a bike or want a different one for this trip" },
+      { id: 'own',    icon: '🏍', title: 'I own my motorcycle',  desc: "I'll be riding my own bike" },
+      { id: 'unsure', icon: '🤔', title: 'Not sure yet',         desc: "I'm still in the planning phase" }
+    ]
+  },
+  {
+    id: 'q9',
+    text: "How far in advance are you planning this trip?",
+    sub: "No wrong answer, just helps us point you in the right direction.",
+    key: 'planning_horizon',
+    options: [
+      { id: 'this_week',     icon: '🔥', title: 'This week or next',     desc: "Let's go   I'm ready to book" },
+      { id: 'this_month',    icon: '📅', title: 'Within the next month',  desc: 'Getting serious, researching options' },
+      { id: 'few_months',    icon: '🗓', title: '1 to 3 months out',      desc: 'Planning ahead, not in a rush' },
+      { id: 'just_browsing', icon: '👀', title: 'Just browsing',          desc: 'No firm timeline yet' }
+    ]
+  }
+];
+
+// =====================================================================
+// STEP 2: QUIZ ENGINE (conditional-aware)
+// =====================================================================
+
+let currentQ = 0;
+let answers = {};
+
+// Returns the list of question indices that are active given current answers
+function activeQuestions() {
+  return QUIZ_QUESTIONS
+    .map((q, i) => ({ q, i }))
+    .filter(({ q }) => !q.conditional || q.conditional(answers))
+    .map(({ i }) => i);
+}
+
+// Given the raw QUIZ_QUESTIONS index, return the display number (1-based, skipping hidden)
+function displayNumber(rawIndex) {
+  return activeQuestions().indexOf(rawIndex) + 1;
+}
+
+function totalVisible() {
+  return activeQuestions().length;
+}
+
+function initProgressDots() {
+  const dots = document.getElementById('progressDots');
+  // Render one dot per non-conditional question + placeholders; we'll update dynamically
+  dots.innerHTML = QUIZ_QUESTIONS
+    .filter(q => !q.conditional)
+    .map((_, i) => `<div class="dot" id="dot-${i}"></div>`)
+    .join('');
+}
+
+function updateProgress() {
+  const active = activeQuestions();
+  const pos    = active.indexOf(currentQ);
+  const total  = active.length;
+  const pct    = pos < 0 ? 100 : (pos / total) * 100;
+
+  document.getElementById('progressBar').style.width = pct + '%';
+  if (pos < 0 || pos >= total) {
+    document.getElementById('progressCount').textContent = 'Finding your ride...';
+  } else {
+    document.getElementById('progressCount').textContent = `Question ${pos + 1} of ${total}`;
+  }
+
+  // Dots: one per active question
+  const dots = document.getElementById('progressDots');
+  dots.innerHTML = active.map((rawIdx, di) => {
+    let cls = 'dot';
+    if (di < pos)       cls += ' answered';
+    if (rawIdx === currentQ) cls += ' active';
+    return `<div class="${cls}"></div>`;
+  }).join('');
+}
+
+function renderQuestion(index) {
+  const q = QUIZ_QUESTIONS[index];
+  if (!q) return;
+  const selectedAnswer = answers[q.key];
+  const active   = activeQuestions();
+  const pos      = active.indexOf(index);
+  const isLastQ  = pos === active.length - 1;
+  const singleCol = q.options.length <= 3 || q.options.length === 5;
+
+  const optionsHTML = q.options.map(opt => `
+    <button class="option-btn${selectedAnswer === opt.id ? ' selected' : ''}"
+      onclick="selectAnswer('${q.key}', '${opt.id}', this)">
+      <div class="option-icon">${opt.icon}</div>
+      <div class="option-text">
+        <div class="option-title">${opt.title}</div>
+        <div class="option-desc">${opt.desc}</div>
+      </div>
+      <div class="option-check"></div>
+    </button>
+  `).join('');
+
+  const gridClass = 'options-grid' + (singleCol ? ' single-col' : '');
+
+  document.getElementById('quizContainer').innerHTML = `
+    <div class="question-card">
+      <div class="q-number">Question ${pos + 1} of ${active.length}</div>
+      <div class="q-text">${q.text}</div>
+      <div class="q-sub">${q.sub}</div>
+      <div class="${gridClass}">${optionsHTML}</div>
+      <div class="nav-row">
+        ${pos > 0 ? `<button class="btn-back" onclick="goBack()">← Back</button>` : '<span></span>'}
+        <button class="btn-next" id="nextBtn" onclick="goNext()" ${selectedAnswer ? '' : 'disabled'}>
+          ${isLastQ ? 'Find My Destination 🏍' : 'Next Question →'}
+        </button>
+      </div>
+    </div>
+  `;
+  updateProgress();
+}
+
+function selectAnswer(key, value, btn) {
+  answers[key] = value;
+  document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  const nextBtn = document.getElementById('nextBtn');
+  if (nextBtn) nextBtn.disabled = false;
+}
+
+function scrollToQuiz() {
+  const el = document.getElementById('progressSection');
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function goNext() {
+  const active = activeQuestions();
+  const pos    = active.indexOf(currentQ);
+  if (pos < active.length - 1) {
+    currentQ = active[pos + 1];
+    renderQuestion(currentQ);
+    scrollToQuiz();
+  } else {
+    showLoading();
+    setTimeout(() => { computeResult(); hideLoading(); }, 900);
+  }
+}
+
+function goBack() {
+  const active = activeQuestions();
+  const pos    = active.indexOf(currentQ);
+  if (pos > 0) {
+    currentQ = active[pos - 1];
+    renderQuestion(currentQ);
+    scrollToQuiz();
+  }
+}
+
+function showLoading() {
+  document.getElementById('loadingOverlay').classList.add('active');
+}
+function hideLoading() {
+  document.getElementById('loadingOverlay').classList.remove('active');
+}
+
+// =====================================================================
+// TRACKING   Google Sheets via Apps Script webhook
+// Replace WEBHOOK_URL with the deployed Apps Script web app URL
+// =====================================================================
+const WEBHOOK_URL = 'PASTE_YOUR_APPS_SCRIPT_URL_HERE';
+
+function trackQuizResult(data) {
+  if (!WEBHOOK_URL || WEBHOOK_URL.indexOf('PASTE') === 0) return;
+  var params = new URLSearchParams(data);
+  var img = new Image();
+  img.src = WEBHOOK_URL + '?' + params.toString();
+}
+
+// =====================================================================
+// STEP 3: MATCHING ALGORITHM - TAG-BASED WITH POPULARITY DAMPENING
+// =====================================================================
+
+// Pre-compute win-rate per city for dampening (approximated per-region)
+// Cities scoring above DAMP_THRESHOLD fraction of region paths get penalized
+const DAMP_THRESHOLD = 0.20; // cap any city at ~20% of region paths before dampening
+const DAMP_PENALTY   = 3;    // points deducted from over-popular cities
+
+// Lightweight win-rate approximation used for dampening
+// Built once at runtime by running a fast scoring pass
+const _POPULARITY = (() => {
+  const regionCities = {};
+  for (const [slug, tags] of Object.entries(CITY_TAGS)) {
+    const r = CITIES[slug] ? CITIES[slug].region : null;
+    if (!r) continue;
+    if (!regionCities[r]) regionCities[r] = [];
+    regionCities[r].push(slug);
+  }
+
+  const motivations = ['scenic_cruise','mountain_twisty','adventure_gravel','cross_country','weekend_escape'];
+  const durations   = ['day','weekend','week','epic'];
+  const seasons     = ['spring','summer','fall','winter'];
+  const experiences = ['beginner','intermediate','experienced'];
+  const groups      = ['solo','passenger','group'];
+  const vibes       = ['nature','food_culture','technical','history_culture','nightlife'];
+
+  const winCount = {};
+  const regionTotal = {};
+
+  for (const m of motivations) for (const d of durations) for (const s of seasons)
+  for (const e of experiences) for (const g of groups) for (const v of vibes) {
+    for (const [region, slugs] of Object.entries(regionCities)) {
+      let best = null, bestScore = -Infinity;
+      for (const slug of slugs) {
+        const sc = _rawScore(slug, m, d, s, e, g, v);
+        if (sc > bestScore) { bestScore = sc; best = slug; }
+      }
+      if (best) {
+        winCount[best] = (winCount[best] || 0) + 1;
+        regionTotal[region] = (regionTotal[region] || 0) + 1;
+      }
+    }
+  }
+
+  // Normalise to fraction of region paths
+  const popularity = {};
+  for (const [slug, wins] of Object.entries(winCount)) {
+    const r = CITIES[slug].region;
+    popularity[slug] = wins / (regionTotal[r] || 1);
+  }
+  return popularity;
+})();
+
+// Raw tag-overlap score (no dampening) - used by popularity pre-pass above
+function _rawScore(slug, motivation, duration, season, experience, group, vibe) {
+  const tags = new Set(CITY_TAGS[slug] || []);
+  let score = 0;
+  const add = (map) => { for (const [t, w] of Object.entries(map)) if (tags.has(t)) score += w; };
+  add(ANSWER_TAGS.motivation[motivation] || {});
+  add(ANSWER_TAGS.duration[duration]     || {});
+  add(ANSWER_TAGS.season[season]         || {});
+  add(ANSWER_TAGS.experience[experience] || {});
+  add(ANSWER_TAGS.group[group]           || {});
+  add(ANSWER_TAGS.vibe[vibe]             || {});
+  return score;
+}
+
+function computeResult() {
+  const { motivation, duration, season, experience, group, vibe,
+          travel_open, home_region, needs_bike } = answers;
+
+  // Resolve target region(s) based on travel willingness
+  let regionPool;
+  if (travel_open === 'yes') {
+    // Open to anywhere: score across all regions, pick global best
+    regionPool = ['west','mountain','south','northeast','midwest'];
+  } else {
+    // Staying close to home: use home region + immediate neighbors
+    const neighbors = {
+      west:      ['west','mountain'],
+      mountain:  ['mountain','west','south'],
+      south:     ['south','mountain','midwest'],
+      northeast: ['northeast','midwest'],
+      midwest:   ['midwest','northeast','south']
+    };
+    regionPool = neighbors[home_region] || ['west','mountain','south','northeast','midwest'];
+  }
+
+  // Gather all candidates from the region pool
+  const candidates = Object.entries(CITY_TAGS).filter(([slug]) =>
+    CITIES[slug] && regionPool.includes(CITIES[slug].region)
+  );
+
+  // Score with tag overlap + popularity dampening
+  const scored = candidates.map(([slug]) => {
+    let score = _rawScore(slug, motivation, duration, season, experience, group, vibe);
+
+    // Popularity dampening
+    const pop = _POPULARITY[slug] || 0;
+    if (pop > DAMP_THRESHOLD) {
+      score -= DAMP_PENALTY * ((pop - DAMP_THRESHOLD) / DAMP_THRESHOLD);
+    }
+
+    // Slight home-region boost when not open to travel (prefer closer)
+    if (travel_open === 'no' && CITIES[slug].region === home_region) {
+      score += 1.5;
+    }
+
+    score += Math.random() * 0.8;
+    return { slug, city: CITIES[slug], score };
+  });
+
+  scored.sort((a, b) => b.score - a.score);
+  const top  = scored[0];
+  const alts = scored.slice(1, 4);
+
+  const brandProfile = getBrandProfile(motivation, experience, group, vibe);
+  const isFlyTo      = FLY_TO_MARKETS.has(top.slug);
+  const needsRental  = needs_bike === 'yes' || needs_bike === 'unsure';
+
+  // Fire tracking pixel   all answers + result data
+  trackQuizResult({
+    motivation:          motivation         || '',
+    duration:            duration           || '',
+    season:              season             || '',
+    experience:          experience         || '',
+    group:               group              || '',
+    travel_open:         travel_open        || '',
+    home_region:         home_region        || '',
+    vibe:                vibe               || '',
+    needs_bike:          needs_bike         || '',
+    planning_horizon:    answers.planning_horizon || '',
+    destination_city:    top.city.name      || '',
+    destination_slug:    top.slug           || '',
+    destination_region:  top.city.region    || '',
+    brand:               brandProfile.brand || '',
+    bike_type:           brandProfile.type  || '',
+    is_fly_to:           isFlyTo ? 'Yes' : 'No',
+    needs_rental:        needsRental ? 'Yes' : 'No',
+    alt_1:               alts[0] ? alts[0].city.name : '',
+    alt_2:               alts[1] ? alts[1].city.name : '',
+    alt_3:               alts[2] ? alts[2].city.name : ''
+  });
+
+  renderResult(top.slug, top.city, brandProfile, alts, isFlyTo, needsRental);
+}
+
+function getBrandProfile(motivation, experience, group, vibe) {
+  // Priority-rule brand selection - ensures all 8 brands are reachable
+  let brand;
+
+  // Beginner -> Honda (most approachable, widely available)
+  if (experience === 'beginner') {
+    brand = 'HONDA';
+  }
+  // Adventure gravel + experienced solo -> KTM (hardcore ADV niche)
+  else if (motivation === 'adventure_gravel' && experience === 'experienced' && group === 'solo') {
+    brand = 'KTM';
+  }
+  // Adventure gravel (any other combo) -> BMW
+  else if (motivation === 'adventure_gravel') {
+    brand = 'BMW';
+  }
+  // Technical vibe + experienced solo -> Ducati
+  else if (vibe === 'technical' && experience === 'experienced' && group === 'solo') {
+    brand = 'DUCATI';
+  }
+  // Mountain twisty + intermediate or experienced -> Kawasaki
+  else if (motivation === 'mountain_twisty' && experience !== 'beginner') {
+    brand = 'KAWASAKI';
+  }
+  // Cross country + history vibe or group ride -> Indian
+  else if (motivation === 'cross_country' && (vibe === 'history_culture' || group === 'group')) {
+    brand = 'INDIAN';
+  }
+  // Food/nightlife vibe + experienced -> Triumph
+  else if ((vibe === 'food_culture' || vibe === 'nightlife') && experience === 'experienced') {
+    brand = 'TRIUMPH';
+  }
+  // Everything else -> Harley-Davidson
+  else {
+    brand = 'HARLEY-DAVIDSON';
+  }
+
+  const p = BRAND_PROFILES[brand];
+  const type = p.types[0];
+
+  const reasons = {
+    'HARLEY-DAVIDSON': 'Harley-Davidson is the most widely available rental on Riders Share, perfect for cruising iconic American roads.',
+    'HONDA':           'Honda offers reliable, versatile bikes that work for every rider level and riding style.',
+    'BMW':             'BMW adventure and touring bikes handle everything from mountain passes to thousand-mile hauls with confidence.',
+    'KAWASAKI':        'Kawasaki sport and naked bikes deliver the precise handling you need for technical canyon carving.',
+    'INDIAN':          'Indian Motorcycle combines classic American heritage with modern touring comfort for the long haul.',
+    'TRIUMPH':         'Triumph roadsters blend British character with modern performance - ideal for riders who want something distinctive.',
+    'DUCATI':          'Ducati sport bikes offer Italian precision and raw performance for riders who demand the best.',
+    'KTM':             'KTM adventure bikes are built for riders who treat paved roads as a suggestion.'
+  };
+
+  return { brand, type, emoji: p.emoji, name: `${p.name} ${type}`, reason: reasons[brand] };
+}
+
+function getRouteDescription(slug, city, motivation, season, vibe, experience) {
+  const road = city.roads[0];
+  const regionLabel = { west: 'West Coast', mountain: 'Mountain West', south: 'South', northeast: 'Northeast', midwest: 'Midwest' }[city.region] || '';
+
+  const intros = {
+    scenic_cruise: `${city.name} puts you at the doorstep of some of the most rewarding cruising in the ${regionLabel}.`,
+    mountain_twisty: `Few places in the ${regionLabel} deliver the kind of technical, corner-carving riding that awaits near ${city.name}.`,
+    adventure_gravel: `Adventure riders looking for genuine backcountry exploration will find their groove around ${city.name}.`,
+    cross_country: `${city.name} makes an ideal base for a multi-day touring adventure through the heart of the ${regionLabel}.`,
+    weekend_escape: `${city.name} is a perfect weekend escape, close enough to reach Friday evening but far enough to feel like a real getaway.`
+  };
+
+  const roadHighlight = `Your featured route is the <strong>${road}</strong>, one of the most celebrated rides in the region.`;
+
+  const vibeNotes = {
+    nature: "The surrounding landscape rewards riders who stop and look around, with overlooks and natural features worth every minute off the throttle.",
+    food_culture: "The local food and culture scene gives you plenty of excuses to stop, explore, and come back with stories.",
+    technical: "If you came looking for focus-demanding riding, this route will not disappoint.",
+    history: "The route passes through layers of American history, giving every stop a story.",
+    nightlife: "After the ride, the city delivers on nightlife and entertainment."
+  };
+
+  return `${intros[motivation] || intros.scenic_cruise} ${roadHighlight} ${vibeNotes[vibe] || ''} ${experience === 'beginner' ? 'The routes here are well-suited to riders still building confidence, with manageable traffic and clearly marked roads.' : ''}`;
+}
+
+// =====================================================================
+// STEP 4: RESULT RENDERING
+// =====================================================================
+
+function buildRentalURL(slug, brandProfile, isFlyTo, destination) {
+  const base = `https://www.riders-share.com/listings/${slug}`;
+  const brandPath = `/${brandProfile.brand}/${brandProfile.type}`;
+  const delivery = isFlyTo ? '/del250' : '';
+  const utm = `?utm_source=quiz&utm_medium=motorcycle-trip-quiz&utm_campaign=find-your-ride&utm_content=${destination}`;
+  return base + brandPath + delivery + utm;
+}
+
+function buildExperienceURL(slug, destination) {
+  const utm = `?utm_source=quiz&utm_medium=motorcycle-trip-quiz&utm_campaign=find-your-ride&utm_content=${destination}`;
+  return `https://www.riders-share.com/experiences/${slug}${utm}`;
+}
+
+function buildTouringProfile() {
+  const {
+    motivation, duration, season, experience, group,
+    travel_open, home_region, needs_bike, planning_horizon, vibe
+  } = answers;
+
+  // ── Label maps ────────────────────────────────────────────────────────────
+  const motivationLabel = {
+    scenic_cruise:    'Scenic Cruise',
+    mountain_twisty:  'Mountain / Twisties',
+    adventure_gravel: 'Adventure / Off-Road',
+    cross_country:    'Epic Cross-Country',
+    weekend_escape:   'Weekend Escape'
+  }[motivation] || motivation;
+
+  const durationLabel = {
+    day:     'Day Trip',
+    weekend: 'Long Weekend (2-3 days)',
+    week:    'Full Week (5-7 days)',
+    epic:    'Epic Adventure (7+ days)'
+  }[duration] || duration;
+
+  const seasonLabel = {
+    spring: 'Spring',
+    summer: 'Summer',
+    fall:   'Fall',
+    winter: 'Winter'
+  }[season] || season;
+
+  const experienceLabel = {
+    beginner:     'New Rider (under 1 yr)',
+    intermediate: 'Intermediate (1-5 yrs)',
+    experienced:  'Experienced (5+ yrs)'
+  }[experience] || experience;
+
+  const groupLabel = {
+    solo:      'Solo Rider',
+    passenger: 'Two-Up (with passenger)',
+    group:     'Group Ride'
+  }[group] || group;
+
+  const vibeLabel = {
+    nature:          'Natural Beauty',
+    food_culture:    'Food and Local Culture',
+    technical:       'Technical / Challenging Roads',
+    history_culture: 'History and Roadside Americana',
+    nightlife:       'Nightlife and Entertainment'
+  }[vibe] || vibe;
+
+  const horizonLabel = {
+    this_week:     'This week or next',
+    this_month:    'Within the next month',
+    few_months:    '1 to 3 months out',
+    just_browsing: 'Just browsing'
+  }[planning_horizon] || null;
+
+  // ── Travel / home ─────────────────────────────────────────────────────────
+  const travelItem = travel_open === 'yes'
+    ? `<div class="tp-item">
+        <div class="tp-icon">✈️</div>
+        <div><div class="tp-label">Travel to Destination</div>
+        <div class="tp-value tp-highlight">Open to anywhere in the USA</div></div>
+       </div>`
+    : `<div class="tp-item">
+        <div class="tp-icon">📍</div>
+        <div><div class="tp-label">Staying Close to Home</div>
+        <div class="tp-value tp-highlight">${{
+            west: 'West Coast', mountain: 'Mountain West',
+            south: 'South / Southeast', northeast: 'Northeast / Mid-Atlantic',
+            midwest: 'Midwest'
+          }[home_region] || 'Near home'} region</div></div>
+       </div>`;
+
+  // ── Bike / rental ─────────────────────────────────────────────────────────
+  const bikeItem = needs_bike === 'yes'
+    ? `<div class="tp-item">
+        <div class="tp-icon">🔑</div>
+        <div><div class="tp-label">Motorcycle</div>
+        <div class="tp-value tp-highlight">Needs a rental</div></div>
+       </div>`
+    : needs_bike === 'own'
+    ? `<div class="tp-item">
+        <div class="tp-icon">🏍</div>
+        <div><div class="tp-label">Motorcycle</div>
+        <div class="tp-value">Riding own bike</div></div>
+       </div>`
+    : `<div class="tp-item">
+        <div class="tp-icon">🤔</div>
+        <div><div class="tp-label">Motorcycle</div>
+        <div class="tp-value">Undecided on rental</div></div>
+       </div>`;
+
+  // ── Planning horizon ──────────────────────────────────────────────────────
+  const horizonItem = horizonLabel
+    ? `<div class="tp-item">
+        <div class="tp-icon">📅</div>
+        <div><div class="tp-label">Planning Horizon</div>
+        <div class="tp-value">${horizonLabel}</div></div>
+       </div>`
+    : '';
+
+  // ── Core trip details (always shown) ─────────────────────────────────────
+  const coreItems = `
+    <div class="tp-item">
+      <div class="tp-icon">🎯</div>
+      <div><div class="tp-label">Ride Style</div>
+      <div class="tp-value">${motivationLabel}</div></div>
+    </div>
+    <div class="tp-item">
+      <div class="tp-icon">⏱</div>
+      <div><div class="tp-label">Trip Length</div>
+      <div class="tp-value">${durationLabel}</div></div>
+    </div>
+    <div class="tp-item">
+      <div class="tp-icon">🌤</div>
+      <div><div class="tp-label">Season</div>
+      <div class="tp-value">${seasonLabel}</div></div>
+    </div>
+    <div class="tp-item">
+      <div class="tp-icon">⚡</div>
+      <div><div class="tp-label">Experience Level</div>
+      <div class="tp-value">${experienceLabel}</div></div>
+    </div>
+    <div class="tp-item">
+      <div class="tp-icon">👥</div>
+      <div><div class="tp-label">Riding With</div>
+      <div class="tp-value">${groupLabel}</div></div>
+    </div>
+    <div class="tp-item">
+      <div class="tp-icon">🏁</div>
+      <div><div class="tp-label">Stop Vibe</div>
+      <div class="tp-value">${vibeLabel}</div></div>
+    </div>`;
+
+  return `
+    <div class="touring-profile">
+      <div class="touring-profile-heading">Your Touring Profile</div>
+      <div class="touring-profile-grid">
+        ${travelItem}
+        ${bikeItem}
+        ${horizonItem}
+        ${coreItems}
+      </div>
+    </div>`;
+}
+
+function renderResult(slug, city, brandProfile, alts, isFlyTo, needsRental = true) {
+  const { motivation, season, vibe, experience, duration } = answers;
+  const rentalURL = buildRentalURL(slug, brandProfile, isFlyTo, slug);
+  const expURL = buildExperienceURL(slug, slug);
+
+  const description = getRouteDescription(slug, city, motivation, season, vibe, experience);
+
+  const altHTML = alts.map(a => `
+    <div class="alt-card" onclick="loadAltResult('${a.slug}')">
+      <div class="alt-card-route">${a.city.roads[0]}</div>
+      <div class="alt-card-city">${a.city.name}</div>
+    </div>
+  `).join('');
+
+  const deliveryNote = isFlyTo ? `<div class="result-badge">✈️ Fly-to Market (delivery available)</div>` : '';
+
+  document.getElementById('quizContainer').style.display = 'none';
+  document.getElementById('progressSection').style.display = 'none';
+
+  document.getElementById('resultContainer').style.display = 'block';
+  document.getElementById('resultContainer').innerHTML = `
+    <div class="result-card">
+      <div class="result-header">
+        <div class="result-destination-label">Your Perfect Destination</div>
+        <div class="result-title">${city.roads[0]}</div>
+        <div class="result-route">📍 ${city.name}</div>
+        <div class="result-badges">
+          <div class="result-badge">🏍 ${brandProfile.type}</div>
+          <div class="result-badge">🗺 ${city.roads.length} nearby routes</div>
+          ${deliveryNote}
+        </div>
+      </div>
+      <div class="result-body">
+        <div class="result-description">${description}</div>
+
+        ${buildTouringProfile()}
+
+        ${needsRental ? `
+        <div class="result-bike">
+          <div class="result-bike-icon">${brandProfile.emoji}</div>
+          <div class="result-bike-info">
+            <div class="result-bike-label">Recommended Rental Bike</div>
+            <div class="result-bike-title">${brandProfile.name}</div>
+            <div class="result-bike-desc">${brandProfile.reason}</div>
+          </div>
+        </div>` : ''}
+
+        <div class="cta-stack">
+          ${needsRental ? `
+          <a href="${rentalURL}" target="_blank" rel="noopener" class="cta-primary">
+            🏍 Browse ${brandProfile.brand.replace(/-/g,' ')} ${brandProfile.type} Rentals in ${city.name.split(',')[0]}
+          </a>` : `
+          <a href="https://www.riders-share.com${city.name.includes(',') ? '/listings/' + slug : ''}" target="_blank" rel="noopener" class="cta-primary">
+            🗺 Explore Motorcycles &amp; Routes in ${city.name.split(',')[0]}
+          </a>`}
+          <a href="${expURL}" target="_blank" rel="noopener" class="cta-secondary">
+            🗺 Explore Motorcycle Tours &amp; Experiences in ${city.name.split(',')[0]}
+          </a>
+          <button class="cta-retake" onclick="retakeQuiz()">
+            🔄 Not your vibe? Retake the quiz
+          </button>
+        </div>
+
+        <div class="share-section">
+          <div class="share-label">Share Your Result</div>
+          <div class="share-btns">
+            <button class="share-btn share-fb" onclick="shareResult('facebook')">Facebook</button>
+            <button class="share-btn share-tw" onclick="shareResult('twitter')">Twitter / X</button>
+            <button class="share-btn share-copy" onclick="shareResult('copy')">Copy Link</button>
+          </div>
+        </div>
+
+        <div class="alt-results">
+          <div class="alt-title">Other Destinations You Might Like</div>
+          <div class="alt-grid">${altHTML}</div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('progressBar').style.width = '100%';
+  document.getElementById('progressCount').textContent = 'Your ride is ready!';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function loadAltResult(slug) {
+  const city = CITIES[slug];
+  if (!city) return;
+  const { motivation, season, vibe, experience, needs_bike } = answers;
+  const brandProfile = getBrandProfile(motivation, experience, answers.group, vibe);
+  const isFlyTo      = FLY_TO_MARKETS.has(slug);
+  const needsRental  = needs_bike === 'yes' || needs_bike === 'unsure';
+  const alts = Object.entries(CITIES)
+    .filter(([s, c]) => s !== slug && c.region === city.region)
+    .slice(0, 3)
+    .map(([s, c]) => ({ slug: s, city: c }));
+  renderResult(slug, city, brandProfile, alts, isFlyTo, needsRental);
+}
+
+function retakeQuiz() {
+  currentQ = 0;
+  answers = {};
+  document.getElementById('resultContainer').style.display = 'none';
+  document.getElementById('quizContainer').style.display = 'block';
+  document.getElementById('progressSection').style.display = 'block';
+  renderQuestion(0);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function shareResult(platform) {
+  const url = window.location.href;
+  const text = 'Just found my perfect motorcycle road trip destination with this quiz from Riders Share!';
+  if (platform === 'facebook') {
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+  } else if (platform === 'twitter') {
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+  } else if (platform === 'copy') {
+    navigator.clipboard.writeText(url).then(() => {
+      alert('Link copied to clipboard!');
+    });
+  }
+}
+
+// =====================================================================
+// FAQ TOGGLE
+// =====================================================================
+// =====================================================================
+// INIT
+// =====================================================================
+window.addEventListener('DOMContentLoaded', () => {
+  initProgressDots();
+  renderQuestion(0);
+});
+</script>
+
+</body>
+</html>
