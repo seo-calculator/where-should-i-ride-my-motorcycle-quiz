@@ -947,16 +947,58 @@ const ANSWER_TAGS = {
   }
 };
 
-// Brand tag profiles - drives getBrandProfile tag matching
-const BRAND_PROFILES = {
-  'HARLEY-DAVIDSON': { types:['Cruiser','Touring'], tags:['cruiser','touring','history_culture','roadside_americana','beginner_friendly','nightlife','food_culture'], emoji:'🦅', name:'Harley-Davidson' },
-  'HONDA':           { types:['Standard','Cruiser','Touring','Adventure'], tags:['standard','cruiser','beginner_friendly','touring','adventure','year_round'], emoji:'🏍', name:'Honda' },
-  'BMW':             { types:['Adventure','Touring'], tags:['adventure','touring','adventure_gravel','mountain','technical','week_plus'], emoji:'🏔', name:'BMW' },
-  'KAWASAKI':        { types:['Sport','Standard'], tags:['sport','standard','twisty','technical','mountain','intermediate'], emoji:'🏁', name:'Kawasaki' },
-  'INDIAN':          { types:['Cruiser','Touring'], tags:['cruiser','touring','history_culture','roadside_americana','cruising','week_plus'], emoji:'🌾', name:'Indian' },
-  'TRIUMPH':         { types:['Standard','Touring','Sport'], tags:['standard','sport','twisty','food_culture','urban_gateway','history_culture','touring'], emoji:'🇬🇧', name:'Triumph' },
-  'DUCATI':          { types:['Sport'], tags:['sport','technical','twisty','advanced','urban_gateway','coastal','nightlife'], emoji:'🔴', name:'Ducati' },
-  'KTM':             { types:['Adventure'], tags:['adventure','adventure_gravel','mountain','advanced','technical','week_plus'], emoji:'🧡', name:'KTM' }
+// Bike type lookup   no brand recommendations, just riding-style-appropriate categories
+// Keyed by: group_motivation_experience (falls back through progressively shorter keys)
+const BIKE_TYPES = {
+  // Passenger always gets a touring or cruiser   comfort above all
+  passenger: {
+    label: 'Touring or Cruiser',
+    emoji: '🛣',
+    desc: 'Two-up riding needs a planted, comfortable bike with real passenger accommodations   think Harley-Davidson touring line, Honda Gold Wing, Indian Chieftain, or BMW R series.',
+    searchType: 'Touring'
+  },
+  // Adventure / gravel
+  adventure_gravel: {
+    label: 'Adventure Bike',
+    emoji: '🏕',
+    desc: 'Off-pavement and mixed terrain calls for a mid-to-large ADV bike   BMW GS series, KTM Adventure, Honda Africa Twin, or Yamaha Tenere.',
+    searchType: 'Adventure'
+  },
+  // Mountain twisty + experienced = sport or naked
+  mountain_twisty_experienced: {
+    label: 'Sport or Naked',
+    emoji: '🏁',
+    desc: 'Technical canyon roads reward a nimble, front-end-communicative bike   sport nakeds like the Kawasaki Z series, Triumph Speed Triple, or Ducati Monster put you in the right position without full-tuck ergonomics.',
+    searchType: 'Sport'
+  },
+  // Mountain twisty + intermediate = standard/naked
+  mountain_twisty_intermediate: {
+    label: 'Standard / Naked',
+    emoji: '🏍',
+    desc: 'Upright ergonomics and neutral handling make standard bikes the right call for twisty roads at an intermediate level   Honda CB series, Kawasaki Z650, or Triumph Trident.',
+    searchType: 'Standard'
+  },
+  // Cross country or scenic cruise = touring
+  touring_default: {
+    label: 'Touring',
+    emoji: '🛣',
+    desc: 'Long days in the saddle call for wind protection, integrated luggage, and comfortable ergonomics   Harley-Davidson Road Glide, BMW K1600, Honda Gold Wing, or Indian Pursuit.',
+    searchType: 'Touring'
+  },
+  // Weekend escape / beginner = cruiser or standard
+  beginner_default: {
+    label: 'Cruiser or Standard',
+    emoji: '🏍',
+    desc: 'A mid-displacement cruiser or standard gives beginners an approachable riding position, predictable handling, and wide availability on Riders Share   Honda Rebel, Harley-Davidson Sportster, or Royal Enfield.',
+    searchType: 'Cruiser'
+  },
+  // Default fallback
+  default: {
+    label: 'Cruiser',
+    emoji: '🏍',
+    desc: 'A cruiser is the most versatile and widely available rental type on Riders Share   comfortable for most roads and easy to find in any major US city.',
+    searchType: 'Cruiser'
+  }
 };
 
 const CITIES = {
@@ -1511,7 +1553,7 @@ function trackQuizResult(data) {
       mode: 'no-cors'
     });
   } catch(e) {
-    // Silently fail — never block the quiz result from rendering
+    // Silently fail   never block the quiz result from rendering
   }
 }
 
@@ -1627,7 +1669,7 @@ function computeResult() {
     // Strong home-region boost so neighbor cities only win if meaningfully better
     if (travel_open === 'no') {
       if (CITIES[slug].region === home_region) {
-        score += 4;
+        score += 6;
       }
     }
 
@@ -1639,7 +1681,7 @@ function computeResult() {
   const top  = scored[0];
   const alts = scored.slice(1, 4);
 
-  const brandProfile = getBrandProfile(motivation, experience, group, vibe);
+  const bikeType = getBikeType(motivation, experience, group);
   const isFlyTo      = FLY_TO_MARKETS.has(top.slug);
   const needsRental  = needs_bike === 'yes' || needs_bike === 'unsure';
 
@@ -1658,8 +1700,7 @@ function computeResult() {
     destination_city:    top.city.name      || '',
     destination_slug:    top.slug           || '',
     destination_region:  top.city.region    || '',
-    brand:               brandProfile.brand || '',
-    bike_type:           brandProfile.type  || '',
+    bike_type:           bikeType.searchType || '',
     is_fly_to:           isFlyTo ? 'Yes' : 'No',
     needs_rental:        needsRental ? 'Yes' : 'No',
     alt_1:               alts[0] ? alts[0].city.name : '',
@@ -1667,61 +1708,33 @@ function computeResult() {
     alt_3:               alts[2] ? alts[2].city.name : ''
   });
 
-  renderResult(top.slug, top.city, brandProfile, alts, isFlyTo, needsRental);
+  renderResult(top.slug, top.city, bikeType, alts, isFlyTo, needsRental);
 }
 
-function getBrandProfile(motivation, experience, group, vibe) {
-  // Priority-rule brand selection - ensures all 8 brands are reachable
-  let brand;
-
-  // Beginner -> Honda (most approachable, widely available)
+function getBikeType(motivation, experience, group) {
+  // Passenger overrides everything   comfort and safety for two-up
+  if (group === 'passenger') {
+    return BIKE_TYPES.passenger;
+  }
+  // Adventure gravel regardless of experience
+  if (motivation === 'adventure_gravel') {
+    return BIKE_TYPES.adventure_gravel;
+  }
+  // Mountain twisty splits by experience
+  if (motivation === 'mountain_twisty') {
+    return experience === 'experienced'
+      ? BIKE_TYPES.mountain_twisty_experienced
+      : BIKE_TYPES.mountain_twisty_intermediate;
+  }
+  // Cross country or scenic cruise = touring
+  if (motivation === 'cross_country' || motivation === 'scenic_cruise') {
+    return BIKE_TYPES.touring_default;
+  }
+  // Beginner on any motivation = cruiser/standard
   if (experience === 'beginner') {
-    brand = 'HONDA';
+    return BIKE_TYPES.beginner_default;
   }
-  // Adventure gravel + experienced solo -> KTM (hardcore ADV niche)
-  else if (motivation === 'adventure_gravel' && experience === 'experienced' && group === 'solo') {
-    brand = 'KTM';
-  }
-  // Adventure gravel (any other combo) -> BMW
-  else if (motivation === 'adventure_gravel') {
-    brand = 'BMW';
-  }
-  // Technical vibe + experienced solo -> Ducati
-  else if (vibe === 'technical' && experience === 'experienced' && group === 'solo') {
-    brand = 'DUCATI';
-  }
-  // Mountain twisty + intermediate or experienced -> Kawasaki
-  else if (motivation === 'mountain_twisty' && experience !== 'beginner') {
-    brand = 'KAWASAKI';
-  }
-  // Cross country + history vibe or group ride -> Indian
-  else if (motivation === 'cross_country' && (vibe === 'history_culture' || group === 'group')) {
-    brand = 'INDIAN';
-  }
-  // Food/nightlife vibe + experienced -> Triumph
-  else if ((vibe === 'food_culture' || vibe === 'nightlife') && experience === 'experienced') {
-    brand = 'TRIUMPH';
-  }
-  // Everything else -> Harley-Davidson
-  else {
-    brand = 'HARLEY-DAVIDSON';
-  }
-
-  const p = BRAND_PROFILES[brand];
-  const type = p.types[0];
-
-  const reasons = {
-    'HARLEY-DAVIDSON': 'Harley-Davidson is the most widely available rental on Riders Share, perfect for cruising iconic American roads.',
-    'HONDA':           'Honda offers reliable, versatile bikes that work for every rider level and riding style.',
-    'BMW':             'BMW adventure and touring bikes handle everything from mountain passes to thousand-mile hauls with confidence.',
-    'KAWASAKI':        'Kawasaki sport and naked bikes deliver the precise handling you need for technical canyon carving.',
-    'INDIAN':          'Indian Motorcycle combines classic American heritage with modern touring comfort for the long haul.',
-    'TRIUMPH':         'Triumph roadsters blend British character with modern performance - ideal for riders who want something distinctive.',
-    'DUCATI':          'Ducati sport bikes offer Italian precision and raw performance for riders who demand the best.',
-    'KTM':             'KTM adventure bikes are built for riders who treat paved roads as a suggestion.'
-  };
-
-  return { brand, type, emoji: p.emoji, name: `${p.name} ${type}`, reason: reasons[brand] };
+  return BIKE_TYPES.default;
 }
 
 function getRouteDescription(slug, city, motivation, season, vibe, experience) {
@@ -1753,12 +1766,11 @@ function getRouteDescription(slug, city, motivation, season, vibe, experience) {
 // STEP 4: RESULT RENDERING
 // =====================================================================
 
-function buildRentalURL(slug, brandProfile, isFlyTo, destination) {
+function buildRentalURL(slug, bikeType, isFlyTo, destination) {
   const base = `https://www.riders-share.com/listings/${slug}`;
-  const brandPath = `/${brandProfile.brand}/${brandProfile.type}`;
   const delivery = isFlyTo ? '/del250' : '';
   const utm = `?utm_source=quiz&utm_medium=motorcycle-trip-quiz&utm_campaign=find-your-ride&utm_content=${destination}`;
-  return base + brandPath + delivery + utm;
+  return base + delivery + utm;
 }
 
 function buildExperienceURL(slug, destination) {
@@ -1912,9 +1924,9 @@ function buildTouringProfile() {
     </div>`;
 }
 
-function renderResult(slug, city, brandProfile, alts, isFlyTo, needsRental = true) {
+function renderResult(slug, city, bikeType, alts, isFlyTo, needsRental = true) {
   const { motivation, season, vibe, experience, duration } = answers;
-  const rentalURL = buildRentalURL(slug, brandProfile, isFlyTo, slug);
+  const rentalURL = buildRentalURL(slug, bikeType, isFlyTo, slug);
   const expURL = buildExperienceURL(slug, slug);
 
   const description = getRouteDescription(slug, city, motivation, season, vibe, experience);
@@ -1939,7 +1951,7 @@ function renderResult(slug, city, brandProfile, alts, isFlyTo, needsRental = tru
         <div class="result-title">${city.roads[0]}</div>
         <div class="result-route">📍 ${city.name}</div>
         <div class="result-badges">
-          <div class="result-badge">🏍 ${brandProfile.type}</div>
+          <div class="result-badge">🏍 ${bikeType.label}</div>
           <div class="result-badge">🗺 ${city.roads.length} nearby routes</div>
           ${deliveryNote}
         </div>
@@ -1951,18 +1963,18 @@ function renderResult(slug, city, brandProfile, alts, isFlyTo, needsRental = tru
 
         ${needsRental ? `
         <div class="result-bike">
-          <div class="result-bike-icon">${brandProfile.emoji}</div>
+          <div class="result-bike-icon">${bikeType.emoji}</div>
           <div class="result-bike-info">
-            <div class="result-bike-label">Recommended Rental Bike</div>
-            <div class="result-bike-title">${brandProfile.name}</div>
-            <div class="result-bike-desc">${brandProfile.reason}</div>
+            <div class="result-bike-label">Recommended Bike Type</div>
+            <div class="result-bike-title">${bikeType.label}</div>
+            <div class="result-bike-desc">${bikeType.desc}</div>
           </div>
         </div>` : ''}
 
         <div class="cta-stack">
           ${needsRental ? `
           <a href="${rentalURL}" target="_blank" rel="noopener" class="cta-primary">
-            🏍 Browse ${brandProfile.brand.replace(/-/g,' ')} ${brandProfile.type} Rentals in ${city.name.split(',')[0]}
+            🏍 Browse ${bikeType.label} Rentals in ${city.name.split(',')[0]}
           </a>` : `
           <a href="https://www.riders-share.com${city.name.includes(',') ? '/listings/' + slug : ''}" target="_blank" rel="noopener" class="cta-primary">
             🗺 Explore Motorcycles &amp; Routes in ${city.name.split(',')[0]}
@@ -2001,14 +2013,14 @@ function loadAltResult(slug) {
   const city = CITIES[slug];
   if (!city) return;
   const { motivation, season, vibe, experience, needs_bike } = answers;
-  const brandProfile = getBrandProfile(motivation, experience, answers.group, vibe);
+  const bikeType = getBikeType(motivation, experience, answers.group);
   const isFlyTo      = FLY_TO_MARKETS.has(slug);
   const needsRental  = needs_bike === 'yes' || needs_bike === 'unsure';
   const alts = Object.entries(CITIES)
     .filter(([s, c]) => s !== slug && c.region === city.region)
     .slice(0, 3)
     .map(([s, c]) => ({ slug: s, city: c }));
-  renderResult(slug, city, brandProfile, alts, isFlyTo, needsRental);
+  renderResult(slug, city, bikeType, alts, isFlyTo, needsRental);
 }
 
 function retakeQuiz() {
