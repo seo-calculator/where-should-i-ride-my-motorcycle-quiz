@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Where Should I Ride My Motorcycle? | Riders Share Trip Planner Quiz</title>
-<meta name="description" content="Find your perfect motorcycle road trip destination with our free quiz. Answer 9 questions and get personalized route recommendations, bike suggestions, and rental links for your next adventure.">
+<meta name="description" content="Find your perfect motorcycle road trip destination with our free quiz. Answer 7 questions and get personalized route recommendations, bike suggestions, and rental links for your next adventure.">
 <meta name="keywords" content="motorcycle road trip planner, where to ride a motorcycle, best motorcycle roads USA, motorcycle trip ideas, motorcycle vacation planner">
 <meta property="og:title" content="Where Should I Ride My Motorcycle? | Riders Share">
-<meta property="og:description" content="Answer 9 questions and discover your perfect motorcycle destination, route, and rental bike.">
+<meta property="og:description" content="Answer 7 questions and discover your perfect motorcycle destination, route, and rental bike.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://seo-calculator.github.io/riders-share-trip-quiz/">
 <meta property="og:image" content="https://images.prismic.io/riders-sharecom/aRyKgGGnmrmGp_Hh_logo_black_background_v2.png?auto=format,compress">
@@ -704,7 +704,7 @@ body {
       "@id": "https://seo-calculator.github.io/riders-share-trip-quiz/#app",
       "name": "Where Should I Ride My Motorcycle? - Riders Share Trip Planner Quiz",
       "url": "https://seo-calculator.github.io/riders-share-trip-quiz/",
-      "description": "Answer 9 questions and get a personalized motorcycle road trip destination, route recommendation, and rental bike suggestion powered by the Riders Share peer-to-peer motorcycle rental marketplace.",
+      "description": "Answer 7 questions and get a personalized motorcycle road trip destination, route recommendation, and rental bike suggestion powered by the Riders Share peer-to-peer motorcycle rental marketplace.",
       "applicationCategory": "TravelApplication",
       "operatingSystem": "Web Browser",
       "isAccessibleForFree": true,
@@ -838,7 +838,7 @@ body {
   <div class="hero-road"></div>
   <div class="hero-badge">Free Trip Planner Quiz</div>
   <h1>Where Should I Ride My<br><span>Motorcycle?</span></h1>
-  <p>Answer 9 quick questions and get a personalized destination, route, and rental recommendation for your next ride.</p>
+  <p>Answer 7 quick questions and get a personalized destination, route, and rental recommendation for your next ride.</p>
   <div class="hero-meta">
     <span>
       <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
@@ -1500,13 +1500,19 @@ function hideLoading() {
 // TRACKING   Google Sheets via Apps Script webhook
 // Replace WEBHOOK_URL with the deployed Apps Script web app URL
 // =====================================================================
-const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbz-__iSPfsojQ7dOFzvdyiZ6NAA6MmBO3LtN4TxXfhAecQOwC5-VFWzd2mgPlpD1ExXVg/exec';
+const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxx5qlWZ1-huUiE_GKOOtow4EBuVchUZDC5cKW-MzCk23czBxG50MThtPt18yWZCew-/exec';
 
 function trackQuizResult(data) {
   if (!WEBHOOK_URL || WEBHOOK_URL.indexOf('PASTE') === 0) return;
-  var params = new URLSearchParams(data);
-  var img = new Image();
-  img.src = WEBHOOK_URL + '?' + params.toString();
+  try {
+    var params = new URLSearchParams(data);
+    fetch(WEBHOOK_URL + '?' + params.toString(), {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+  } catch(e) {
+    // Silently fail — never block the quiz result from rendering
+  }
 }
 
 // =====================================================================
@@ -1587,13 +1593,18 @@ function computeResult() {
     // Open to anywhere: score across all regions, pick global best
     regionPool = ['west','mountain','south','northeast','midwest'];
   } else {
-    // Staying close to home: use home region + immediate neighbors
+    // Staying close to home: home region only + one geographically honest neighbor
+    // Northeast borders South (VA, NC, MD) but NOT Midwest (too far for a road trip)
+    // Midwest borders South and Northeast's western edge but NOT West
+    // West borders Mountain only
+    // Mountain borders West and South (AZ/NM touch TX)
+    // South borders Mountain, Midwest, and Northeast
     const neighbors = {
       west:      ['west','mountain'],
       mountain:  ['mountain','west','south'],
-      south:     ['south','mountain','midwest'],
-      northeast: ['northeast','midwest'],
-      midwest:   ['midwest','northeast','south']
+      south:     ['south','mountain','midwest','northeast'],
+      northeast: ['northeast','south'],
+      midwest:   ['midwest','south']
     };
     regionPool = neighbors[home_region] || ['west','mountain','south','northeast','midwest'];
   }
@@ -1613,9 +1624,11 @@ function computeResult() {
       score -= DAMP_PENALTY * ((pop - DAMP_THRESHOLD) / DAMP_THRESHOLD);
     }
 
-    // Slight home-region boost when not open to travel (prefer closer)
-    if (travel_open === 'no' && CITIES[slug].region === home_region) {
-      score += 1.5;
+    // Strong home-region boost so neighbor cities only win if meaningfully better
+    if (travel_open === 'no') {
+      if (CITIES[slug].region === home_region) {
+        score += 4;
+      }
     }
 
     score += Math.random() * 0.8;
@@ -2007,6 +2020,28 @@ function retakeQuiz() {
   renderQuestion(0);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+// =====================================================================
+// AUTO-HEIGHT: postMessage reporter for iframe embeds
+// Fires on load, after every question render, and after result render
+// =====================================================================
+function reportHeight() {
+  const h = document.documentElement.scrollHeight;
+  window.parent.postMessage({ type: 'rs-quiz-height', height: h }, '*');
+}
+
+// Observe any DOM change to the quiz/result containers and re-report
+(function() {
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(reportHeight).observe(document.body);
+  } else {
+    // Fallback: fire on a short interval for older browsers
+    setInterval(reportHeight, 400);
+  }
+  // Also fire immediately on load
+  window.addEventListener('load', reportHeight);
+  reportHeight();
+})();
 
 function shareResult(platform) {
   const url = window.location.href;
