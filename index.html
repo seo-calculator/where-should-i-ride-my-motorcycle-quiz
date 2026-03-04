@@ -1721,7 +1721,7 @@ function getRouteDescription(slug, city, motivation, season, vibe, experience) {
 
 function buildRentalURL(slug, bikeType, isFlyTo, destination) {
   const base = `https://www.riders-share.com/listings/${slug}/${bikeType.searchType}`;
-  const delivery = isFlyTo ? '/del250' : '';
+  const delivery = (isFlyTo && answers.travel_open === 'yes') ? '/del250' : '';
   const utm = `?utm_source=quiz&utm_medium=motorcycle-trip-quiz&utm_campaign=find-your-ride&utm_content=${destination}`;
   return base + delivery + utm;
 }
