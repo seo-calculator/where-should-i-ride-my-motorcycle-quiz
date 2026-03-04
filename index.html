@@ -513,6 +513,32 @@ body {
   .tp-item.tp-full { grid-column: 1; }
 }
 
+.state-select-wrap {
+  margin: 8px 0 24px;
+}
+.state-select {
+  width: 100%;
+  padding: 16px 20px;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dark);
+  background: white;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231678c2' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 18px center;
+  transition: border-color 0.2s;
+}
+.state-select:focus {
+  outline: none;
+  border-color: var(--rs-blue);
+  box-shadow: 0 0 0 3px rgba(22,120,194,0.15);
+}
+
 /* CTA BUTTONS */
 .cta-stack { display: flex; flex-direction: column; gap: 12px; }
 .cta-primary {
@@ -1317,17 +1343,11 @@ const QUIZ_QUESTIONS = [
   },
   {
     id: 'q6b',
-    text: "Where in the USA are you located?",
-    sub: "We'll suggest destinations within a reasonable distance.",
+    text: "What state are you in?",
+    sub: "We'll find routes within a reasonable ride from home.",
     key: 'home_region',
-    conditional: (ans) => ans.travel_open === 'no',
-    options: [
-      { id: 'west',      icon: '🌊', title: 'West Coast',             desc: 'CA, OR, WA, HI, AK' },
-      { id: 'mountain',  icon: '⛰',  title: 'Mountain West',          desc: 'CO, AZ, NV, UT, MT, ID, WY, NM, SD' },
-      { id: 'south',     icon: '🌴', title: 'South / Southeast',       desc: 'TX, FL, TN, NC, GA, VA and more' },
-      { id: 'northeast', icon: '🗽', title: 'Northeast / Mid-Atlantic', desc: 'NY, PA, MA, CT, VT, NH, ME, NJ and more' },
-      { id: 'midwest',   icon: '🌽', title: 'Midwest',                 desc: 'OH, MI, IL, IN, WI, MN, MO and more' }
-    ]
+    type: 'dropdown',
+    conditional: (ans) => ans.travel_open === 'no'
   },
   {
     id: 'q7',
@@ -1366,6 +1386,42 @@ const QUIZ_QUESTIONS = [
     ]
   }
 ];
+
+// =====================================================================
+// STATE DATA: maps each US state to a region for scoring
+// also stores display name for the touring profile
+// =====================================================================
+const STATE_TO_REGION = {
+  'AL': 'south',    'AK': 'west',     'AZ': 'mountain', 'AR': 'south',
+  'CA': 'west',     'CO': 'mountain', 'CT': 'northeast','DE': 'northeast',
+  'FL': 'south',    'GA': 'south',    'HI': 'west',     'ID': 'west',
+  'IL': 'midwest',  'IN': 'midwest',  'IA': 'midwest',  'KS': 'midwest',
+  'KY': 'south',    'LA': 'south',    'ME': 'northeast','MD': 'northeast',
+  'MA': 'northeast','MI': 'midwest',  'MN': 'midwest',  'MS': 'south',
+  'MO': 'midwest',  'MT': 'mountain', 'NE': 'midwest',  'NV': 'mountain',
+  'NH': 'northeast','NJ': 'northeast','NM': 'mountain', 'NY': 'northeast',
+  'NC': 'south',    'ND': 'midwest',  'OH': 'midwest',  'OK': 'south',
+  'OR': 'west',     'PA': 'northeast','RI': 'northeast','SC': 'south',
+  'SD': 'mountain', 'TN': 'south',    'TX': 'south',    'UT': 'mountain',
+  'VT': 'northeast','VA': 'south',    'WA': 'west',     'WV': 'south',
+  'WI': 'midwest',  'WY': 'mountain', 'DC': 'northeast'
+};
+
+const STATE_NAMES = {
+  'AL':'Alabama',       'AK':'Alaska',         'AZ':'Arizona',        'AR':'Arkansas',
+  'CA':'California',    'CO':'Colorado',        'CT':'Connecticut',    'DE':'Delaware',
+  'FL':'Florida',       'GA':'Georgia',         'HI':'Hawaii',         'ID':'Idaho',
+  'IL':'Illinois',      'IN':'Indiana',         'IA':'Iowa',           'KS':'Kansas',
+  'KY':'Kentucky',      'LA':'Louisiana',       'ME':'Maine',          'MD':'Maryland',
+  'MA':'Massachusetts', 'MI':'Michigan',        'MN':'Minnesota',      'MS':'Mississippi',
+  'MO':'Missouri',      'MT':'Montana',         'NE':'Nebraska',       'NV':'Nevada',
+  'NH':'New Hampshire', 'NJ':'New Jersey',      'NM':'New Mexico',     'NY':'New York',
+  'NC':'North Carolina','ND':'North Dakota',    'OH':'Ohio',           'OK':'Oklahoma',
+  'OR':'Oregon',        'PA':'Pennsylvania',    'RI':'Rhode Island',   'SC':'South Carolina',
+  'SD':'South Dakota',  'TN':'Tennessee',       'TX':'Texas',          'UT':'Utah',
+  'VT':'Vermont',       'VA':'Virginia',        'WA':'Washington',     'WV':'West Virginia',
+  'WI':'Wisconsin',     'WY':'Wyoming',         'DC':'Washington, DC'
+};
 
 // =====================================================================
 // STEP 2: QUIZ ENGINE (conditional-aware)
@@ -1430,28 +1486,43 @@ function renderQuestion(index) {
   const active   = activeQuestions();
   const pos      = active.indexOf(index);
   const isLastQ  = pos === active.length - 1;
-  const singleCol = q.options.length <= 3 || q.options.length === 5;
 
-  const optionsHTML = q.options.map(opt => `
-    <button class="option-btn${selectedAnswer === opt.id ? ' selected' : ''}"
-      onclick="selectAnswer('${q.key}', '${opt.id}', this)">
-      <div class="option-icon">${opt.icon}</div>
-      <div class="option-text">
-        <div class="option-title">${opt.title}</div>
-        <div class="option-desc">${opt.desc}</div>
-      </div>
-      <div class="option-check"></div>
-    </button>
-  `).join('');
-
-  const gridClass = 'options-grid' + (singleCol ? ' single-col' : '');
+  let inputHTML;
+  if (q.type === 'dropdown') {
+    // State dropdown   renders a <select> instead of option buttons
+    const stateAbbrs = Object.keys(STATE_NAMES).sort((a, b) => STATE_NAMES[a].localeCompare(STATE_NAMES[b]));
+    const opts = stateAbbrs.map(abbr =>
+      `<option value="${abbr}" ${selectedAnswer === abbr ? 'selected' : ''}>${STATE_NAMES[abbr]}</option>`
+    ).join('');
+    inputHTML = `
+      <div class="state-select-wrap">
+        <select id="stateSelect" class="state-select" onchange="selectState(this.value)">
+          <option value="">-- Select your state --</option>
+          ${opts}
+        </select>
+      </div>`;
+  } else {
+    const singleCol = q.options.length <= 3 || q.options.length === 5;
+    const gridClass = 'options-grid' + (singleCol ? ' single-col' : '');
+    inputHTML = `<div class="${gridClass}">` + q.options.map(opt => `
+      <button class="option-btn${selectedAnswer === opt.id ? ' selected' : ''}"
+        onclick="selectAnswer('${q.key}', '${opt.id}', this)">
+        <div class="option-icon">${opt.icon}</div>
+        <div class="option-text">
+          <div class="option-title">${opt.title}</div>
+          <div class="option-desc">${opt.desc}</div>
+        </div>
+        <div class="option-check"></div>
+      </button>
+    `).join('') + `</div>`;
+  }
 
   document.getElementById('quizContainer').innerHTML = `
     <div class="question-card">
       <div class="q-number">Question ${pos + 1} of ${active.length}</div>
       <div class="q-text">${q.text}</div>
       <div class="q-sub">${q.sub}</div>
-      <div class="${gridClass}">${optionsHTML}</div>
+      ${inputHTML}
       <div class="nav-row">
         ${pos > 0 ? `<button class="btn-back" onclick="goBack()">← Back</button>` : '<span></span>'}
         <button class="btn-next" id="nextBtn" onclick="goNext()" ${selectedAnswer ? '' : 'disabled'}>
@@ -1467,6 +1538,16 @@ function selectAnswer(key, value, btn) {
   answers[key] = value;
   document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
+  const nextBtn = document.getElementById('nextBtn');
+  if (nextBtn) nextBtn.disabled = false;
+}
+
+function selectState(abbr) {
+  if (!abbr) return;
+  // Store the state abbr for display in the touring profile
+  answers.home_state = abbr;
+  // Derive the region for scoring
+  answers.home_region = STATE_TO_REGION[abbr] || 'northeast';
   const nextBtn = document.getElementById('nextBtn');
   if (nextBtn) nextBtn.disabled = false;
 }
@@ -1510,7 +1591,7 @@ function hideLoading() {
 // TRACKING   Google Sheets via Apps Script webhook
 // Replace WEBHOOK_URL with the deployed Apps Script web app URL
 // =====================================================================
-const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbz5NAy97PqTgNI0RsiG_W_GzmNi_aA0CfPp1bEsaOf0fo6lGcrb38_1eZb4ADH88YWs/exec';
+const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzqloyLgodGfIUeNIUd3Y1hnbRb7S-yoeGgs8Mki15lHYaYXsQ8eA48HgqlFAYCwTjC/exec';
 
 function trackQuizResult(data) {
   if (!WEBHOOK_URL || WEBHOOK_URL.indexOf('PASTE') === 0) return;
@@ -1662,6 +1743,7 @@ function computeResult() {
     group:               group              || '',
     travel_open:         travel_open        || '',
     home_region:         home_region        || '',
+    home_state:          answers.home_state  || '',
     vibe:                vibe               || '',
     needs_bike:          needs_bike         || '',
     planning_horizon:    answers.planning_horizon || '',
@@ -1797,11 +1879,11 @@ function buildTouringProfile() {
     : `<div class="tp-item">
         <div class="tp-icon">📍</div>
         <div><div class="tp-label">Staying Close to Home</div>
-        <div class="tp-value tp-highlight">${{
+        <div class="tp-value tp-highlight">${answers.home_state ? STATE_NAMES[answers.home_state] || home_region : {
             west: 'West Coast', mountain: 'Mountain West',
             south: 'South / Southeast', northeast: 'Northeast / Mid-Atlantic',
             midwest: 'Midwest'
-          }[home_region] || 'Near home'} region</div></div>
+          }[home_region] || 'Near home'}</div></div>
        </div>`;
 
   // ── Bike / rental ─────────────────────────────────────────────────────────
